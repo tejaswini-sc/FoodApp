@@ -21,11 +21,12 @@ public class UserDaoImp implements UserDAO {
 	private static final String Select_Query="Select * from user where userid= ?";
 	private static final String Select_All_Query = "select *from user";
 	private static final String Delete_Query = "delete from user where userid =?";
+	private static final String Get_Query = "Select * from User where email=?";
 	
 	
 	
 	@Override
-	public void addUser(User u) {
+	public int addUser(User u) {
 		Connection connection=DBConnection.getConnection();
 		
 		try {
@@ -38,12 +39,13 @@ public class UserDaoImp implements UserDAO {
 		ptsmt.setTimestamp(6, new Timestamp(System.currentTimeMillis()));
 		
 		int i=ptsmt.executeUpdate();
-		System.out.println(i);
+		return i;
 		
 		
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}		
+		return 0;
 	}
 
 	@Override
@@ -56,7 +58,7 @@ public class UserDaoImp implements UserDAO {
 			ptsmt.setString(3, u.getPassword());
 			ptsmt.setString(4, u.getAddress());
 			ptsmt.setTimestamp(5, new Timestamp(System.currentTimeMillis()));
-			ptsmt.setInt(6, u.getId());
+			ptsmt.setInt(6, u.getuserid());
 			
 			int i = ptsmt.executeUpdate();
 			System.out.println(i);
@@ -70,12 +72,12 @@ public class UserDaoImp implements UserDAO {
 	}
 
 	@Override
-	public void deleteUser(int id) {
+	public void deleteUser(int userid) {
 		Connection con = DBConnection.getConnection();
 		User u=null;
 		try {
 			PreparedStatement pstmt = con.prepareStatement(Delete_Query);
-			pstmt.setInt(1, id);
+			pstmt.setInt(1, userid);
 			int i = pstmt.executeUpdate();
 			System.out.println(i);
 			
@@ -87,13 +89,13 @@ public class UserDaoImp implements UserDAO {
 	}
 
 	@Override
-	public User getUser(int id) {
+	public User getUser(int userid) {
 		Connection con = DBConnection.getConnection();
 		User u=null;
 		try {
 			PreparedStatement pstmt = con.prepareStatement(Select_Query);
 			
-			pstmt.setInt(1, id);
+			pstmt.setInt(1, userid);
 			ResultSet res = pstmt.executeQuery();
 			while(res.next()) {
 				u = printres(res);
@@ -135,7 +137,58 @@ public class UserDaoImp implements UserDAO {
 		Timestamp created_at=res.getTimestamp("created_at");
 		Timestamp login_time=res.getTimestamp("login_time");
 		
-		 User u = new User(userid, name, password, email, address, role, null, null);
+		 User u = new User(userid, name, password, email, address, role,  created_at, login_time);
 		return u;
+	}
+
+	@Override
+	public User getUserByEmail(String email) {
+
+		Connection con = DBConnection.getConnection();
+
+		User user = null;
+
+		try {
+
+			PreparedStatement pstmt =
+					con.prepareStatement(Get_Query);
+
+			pstmt.setString(1, email);
+
+			ResultSet res = pstmt.executeQuery();
+
+			if(res.next()) {
+
+				user = new User(
+
+						res.getInt("userid"),
+
+						res.getString("name"),
+
+						res.getString("password"),
+
+						res.getString("email"),
+
+						res.getString("address"),
+
+						res.getString("role"),
+
+						res.getTimestamp("created_at"),
+
+						res.getTimestamp("login_time")
+
+				);
+
+			}
+
+		}
+		catch(SQLException e) {
+
+			e.printStackTrace();
+
+		}
+
+		return user;
+
 	}
 }

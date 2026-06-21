@@ -3,7 +3,7 @@ package com.foodapp.model;
 import java.sql.Timestamp;
 
 public class User {
-		private int id;
+		private int userid;
 		private String userName;
 		private String password;
 		private String email;
@@ -27,10 +27,10 @@ public class User {
 		
 		
 
-		public User(int id, String userName, String password, String email, String address, String role,
+		public User(int userid, String userName, String password, String email, String address, String role,
 				Timestamp createdDate, Timestamp loginDate) {
 			super();
-			this.id = id;
+			this.userid = userid;
 			this.userName = userName;
 			this.password = password;
 			this.email = email;
@@ -41,17 +41,17 @@ public class User {
 		}
 
 		/**
-		 * @return the id
+		 * @return the userid
 		 */
-		public int getId() {
-			return id;
+		public int getuserid() {
+			return userid;
 		}
 
 		/**
-		 * @param id the id to set
+		 * @param userid the userid to set
 		 */
-		public void setId(int id) {
-			this.id = id;
+		public void setuserid(int userid) {
+			this.userid = userid;
 		}
 
 		/**
@@ -132,7 +132,7 @@ public class User {
 
 		@Override
 		public String toString() {
-			return "User [id=" + id + ", userName=" + userName + ", password=" + password + ", email=" + email
+			return "User [userid=" + userid + ", userName=" + userName + ", password=" + password + ", email=" + email
 					+ ", address=" + address + ", role=" + role + ", createdDate=" + createdDate + ", loginDate="
 					+ loginDate + "]";
 		}

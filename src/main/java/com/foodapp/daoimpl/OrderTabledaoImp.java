@@ -19,6 +19,9 @@ public class OrderTabledaoImp implements OrderTableDAO
 	private static final String Insert_Query = "insert into OrderTable(UserID,RestaurantID,OrderDate,TotalAmount,Status,PaymentMethod)values(?,?,?,?,?,?);";
 	private static final String Select_Oid_Query = "Select * from OrderTable where OrderId=?";
 	private static final String Selct_all_Query = "Select * from OrderTable";
+	private static final String Select_Uid_Query = "Select * from OrderTable where UserId=?";
+	private static final String Upadate_Status_Query = "Update OrderTable set Status=? where orderId=?";
+	private static final String Delete_Query = "Delete from OrderTable where OrderId=?";
 	Connection con = DBConnection.getConnection();
 	@Override
 	public void addOrder(OrderTable o) {
@@ -59,14 +62,82 @@ public class OrderTabledaoImp implements OrderTableDAO
 
 	@Override
 	public List<OrderTable> getAllOrder() {
-		ArrayList<OrderTable> l = new ArrayList<OrderTable>();
+
+		ArrayList<OrderTable> l = new ArrayList<>();
+
 		try {
-			Statement stsmt = con.createStatement();
-			ResultSet res = stsmt.executeQuery(Selct_all_Query);
-			OrderTable o=printres(res);
-			l.add(o);
+
+			Statement stmt = con.createStatement();
+
+			ResultSet res = stmt.executeQuery(Selct_all_Query);
+
+			while(res.next()) {
+
+				OrderTable o = new OrderTable(
+
+						res.getInt("OrderId"),
+
+						res.getInt("UserId"),
+
+						res.getInt("RestaurantId"),
+
+						res.getTimestamp("OrderDate"),
+
+						res.getFloat("TotalAmount"),
+
+						res.getString("Status"),
+
+						res.getString("PaymentMethod")
+
+				);
+
+				l.add(o);
+
+			}
+
+		}
+		catch(SQLException e) {
+
+			e.printStackTrace();
+
+		}
+
+		return l;
+	}
+
+	@Override
+	public List<OrderTable> getOrderByUserId(int UserId) {
+		ArrayList<OrderTable> l = new ArrayList<OrderTable>();
+	
+		try {
+			PreparedStatement pstmt = con.prepareStatement(Select_Uid_Query);
+			pstmt.setInt(1, UserId);
+			ResultSet res = pstmt.executeQuery();
+			while(res.next()) {
+
+				OrderTable o = new OrderTable(
+
+						res.getInt("OrderId"),
+
+						res.getInt("UserId"),
+
+						res.getInt("RestaurantId"),
+
+						res.getTimestamp("OrderDate"),
+
+						res.getFloat("TotalAmount"),
+
+						res.getString("Status"),
+
+						res.getString("PaymentMethod")
+
+				);
+
+				l.add(o);
+			}
 			
-		} catch (SQLException e) {
+		} 
+			catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -74,21 +145,35 @@ public class OrderTabledaoImp implements OrderTableDAO
 	}
 
 	@Override
-	public List<OrderTable> getOrderByUserId(int UserId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public boolean udateOrderStatus(int orderId, String status) {
-		// TODO Auto-generated method stub
+		int i=0;
+		try {
+			PreparedStatement pstmt = con.prepareStatement(Upadate_Status_Query);
+			pstmt.setString(1, status);
+			pstmt.setInt(2, orderId);
+			i = pstmt.executeUpdate();
+			return i>0;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return false;
 	}
 
 	@Override
 	public boolean deleteOrder(int orderId) {
-		// TODO Auto-generated method stub
+		try {
+			PreparedStatement pstmt = con.prepareStatement(Delete_Query);
+			pstmt.setInt(1, orderId);
+			int i = pstmt.executeUpdate();
+			return i>0;
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return false;
+		
 	}
 
 	
