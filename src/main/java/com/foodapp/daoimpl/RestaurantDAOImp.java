@@ -12,19 +12,19 @@ public class RestaurantDAOImp implements RestaurantDAO {
 
 
     private static final String INSERT =
-            "INSERT INTO restaurant(name,cuisinetype,deliverytime,address,adminuserid,rating,isactive,image_path) VALUES(?,?,?,?,?,?,?,?)";
+            "INSERT INTO restaurant(Name,CuisineType,DeliveryTime,Address,AdminUserID,Rating,IsActive,image_path) VALUES(?,?,?,?,?,?,?,?)";
 
     private static final String GET_ONE =
-            "SELECT * FROM restaurant WHERE restaurant_id=?";
+            "SELECT * FROM restaurant WHERE RestaurantID=?";
 
     private static final String GET_ALL =
             "SELECT * FROM restaurant";
 
     private static final String UPDATE =
-            "UPDATE restaurant SET name=?,cuisine_type=?,delivery_time=?,address=?,admin_user_id=?,rating=?,is_active=?,image_path=? WHERE restaurant_id=?";
+            "UPDATE restaurant SET Name=?,CuisineType=?,DeliveryTime=?,Address=?,AdminUserID=?,Rating=?,IsActive=?,image_path=? WHERE RestaurantID=?";
 
     private static final String DELETE =
-            "DELETE FROM restaurant WHERE restaurant_id=?";
+            "DELETE FROM restaurant WHERE RestaurantID=?";
 
 //
 //    public RestaurantDAOImp() {
@@ -81,14 +81,14 @@ public class RestaurantDAOImp implements RestaurantDAO {
 
                 r = new Restaurant();
 
-                r.setResturantID(rs.getInt("restaurant_id"));
+                r.setResturantID(rs.getInt("RestaurantID"));
                 r.setName(rs.getString("name"));
-                r.setCuisineType(rs.getString("cuisine_type"));
-                r.setDeliveryTime(rs.getInt("delivery_time"));
-                r.setAddress(rs.getString("address"));
-                r.setAdminUserId(rs.getInt("admin_user_id"));
-                r.setRating(rs.getDouble("rating"));
-                r.setActive(rs.getBoolean("is_active"));
+                r.setCuisineType(rs.getString("CuisineType"));
+                r.setDeliveryTime(rs.getInt("DeliveryTime"));
+                r.setAddress(rs.getString("Address"));
+                r.setAdminUserId(rs.getInt("AdminUserID"));
+                r.setRating(rs.getDouble("Rating"));
+                r.setActive(rs.getBoolean("IsActive"));
                 r.setImagePath(rs.getString("image_path"));
 
             }
@@ -120,13 +120,13 @@ public class RestaurantDAOImp implements RestaurantDAO {
                 Restaurant r = new Restaurant();
 
                 r.setResturantID(rs.getInt("RestaurantId"));
-                r.setName(rs.getString("name"));
-                r.setCuisineType(rs.getString("cuisinetype"));
-                r.setDeliveryTime(rs.getInt("deliverytime"));
-                r.setAddress(rs.getString("address"));
-                r.setAdminUserId(rs.getInt("adminuserid"));
-                r.setRating(rs.getDouble("rating"));
-                r.setActive(rs.getBoolean("isactive"));
+                r.setName(rs.getString("Name"));
+                r.setCuisineType(rs.getString("CuisineType"));
+                r.setDeliveryTime(rs.getInt("DeliveryTime"));
+                r.setAddress(rs.getString("Address"));
+                r.setAdminUserId(rs.getInt("AdminUserID"));
+                r.setRating(rs.getDouble("Rating"));
+                r.setActive(rs.getBoolean("IsActive"));
                 r.setImagePath(rs.getString("image_path"));
 
                 list.add(r);

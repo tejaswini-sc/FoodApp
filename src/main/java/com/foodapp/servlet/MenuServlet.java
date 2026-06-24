@@ -4,7 +4,9 @@ import java.io.IOException;
 import java.util.List;
 
 import com.foodapp.daoimpl.MenuDAOimp;
+import com.foodapp.daoimpl.RestaurantDAOImp;
 import com.foodapp.model.Menu;
+import com.foodapp.model.Restaurant;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -21,6 +23,12 @@ public class MenuServlet extends HttpServlet {
 		
 		int restaurantId = Integer.parseInt(req.getParameter("restaurantId"));
 		
+		RestaurantDAOImp restaurantDao = new RestaurantDAOImp();
+
+		Restaurant restaurant =restaurantDao.getResturant(restaurantId);
+
+				req.setAttribute("restaurant",restaurant);
+		
 		MenuDAOimp menuDAOimp = new MenuDAOimp();
 		List<Menu> menuByRestaurant = menuDAOimp.getMenuByRestaurant(restaurantId);
 		System.out.println(
@@ -34,6 +42,9 @@ public class MenuServlet extends HttpServlet {
 		
 		RequestDispatcher rd = req.getRequestDispatcher("Menu.jsp");
 		rd.forward(req, resp);
+		System.out.println(restaurantId);
+
+		System.out.println(restaurant);
 		
 	}
 	

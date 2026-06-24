@@ -2,6 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.List,com.foodapp.model.Menu" %>
     
+    
+    <%@ page import="com.foodapp.model.Restaurant"%>
+    
 <!DOCTYPE html>
 <html>
 
@@ -11,12 +14,20 @@
 
 <title>Menu</title>
 
-<link rel="stylesheet" href="Menu.css">
+<link rel="stylesheet" href="css/common.css">
 
+<link rel="stylesheet" href="css/Menu.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
+<link rel="stylesheet"
+
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+<link rel="stylesheet"
+
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 </head>
 
 <body>
@@ -44,23 +55,75 @@
 
 </ul>
 
+<div class="nav-icons">
+
+<div class="icon-btn">
+
+🛒
+
+</div>
+
+<div class="icon-btn">
+
+👤
+
+</div>
+
+</div>
+
 </nav>
 
+<%
 
+Restaurant restaurant=
+
+(Restaurant)
+
+request.getAttribute("restaurant");
+
+%>
 
 <!-- Hero -->
 
-<section class="hero">
+<section class="menu-hero">
 
-<h1>Today's Special Menu</h1>
+<div class="tag">
 
-<p>Handcrafted meals prepared with fresh ingredients.</p>
+🍽️ Chef's Recommendation
 
-<input type="text" placeholder="Search food items...">
+</div>
+
+<h1>
+
+Find Your
+
+Favourite Meal
+
+</h1>
+
+<p>
+
+Freshly prepared meals crafted with premium ingredients.
+
+</p>
+
+<div class="menu-search">
+
+<input
+
+type="text"
+
+placeholder="Search dishes...">
+
+</div>
+
+<div class="restaurant-name">
+
+🍽️ <%=restaurant.getName()%>
+
+</div>
 
 </section>
-
-
 
 <!-- Menu Items -->
 
@@ -69,26 +132,79 @@
 <% List<Menu> menuByRestaurant=(List<Menu>)request.getAttribute("menuByRestaurant"); 
 	for(Menu menu:menuByRestaurant){
 		%>
-		<div class="food-card">
+<div class="food-card">
 
-		<img src="<%=menu.getImagePath()%>">
-		
+<div class="image-box">
 
-		<h3><%=menu.getItemName() %></h3>
+<img src="<%=menu.getImagePath()%>">
 
-		<p><%=menu.getDescription() %></p>
+</div>
 
-		<span class="category"><%=menu.getCategory() %></span>
+<div class="food-info">
 
-		<div class="bottom">
+<div class="food-top">
 
-		<h4>₹<%=menu.getPrice() %></h4>
+<span class="category">
 
-		<button>Add To Cart</button>
+<%=menu.getCategory()%>
 
-		</div>
+</span>
 
-		</div>
+<div class="heart">
+
+<i class="fa-regular fa-heart"></i>
+
+</div>
+
+</div>
+
+<h3>
+
+<%=menu.getItemName()%>
+
+</h3>
+
+<div class="food-meta">
+
+<span class="food-type">
+
+<%=menu.getFoodType()%>
+
+</span>
+
+<span class="food-rating">
+
+⭐ <%=menu.getRating()%>
+
+</span>
+
+</div>
+
+<p>
+
+<%=menu.getDescription()%>
+
+</p>
+
+<div class="price-row">
+
+<h4>
+
+₹<%=menu.getPrice()%>
+
+</h4>
+
+<button>
+
+Add To Cart
+
+</button>
+
+</div>
+
+</div>
+
+</div>
 		
 		<%
 	}
@@ -97,6 +213,76 @@
 
 
 </section>
+
+<footer>
+
+<div class="footer-container">
+
+<div class="footer-left">
+
+<h2>
+
+🍃 FoodCafe
+
+</h2>
+
+<p>
+
+Crafting delicious experiences one meal at a time.
+
+</p>
+
+</div>
+
+<div class="footer-links">
+
+<h3>
+
+Quick Links
+
+</h3>
+
+<ul>
+
+<li>
+
+Home
+
+</li>
+
+<li>
+
+Restaurants
+
+</li>
+
+<li>
+
+About
+
+</li>
+
+<li>
+
+Contact
+
+</li>
+
+</ul>
+
+</div>
+
+</div>
+
+<hr>
+
+<p class="copyright">
+
+© 2026 FoodCafe | Made with ❤️
+
+</p>
+
+</footer>
 
 </body>
 

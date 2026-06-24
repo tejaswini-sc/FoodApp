@@ -15,6 +15,9 @@ public class Menu {
 	private Timestamp createdAt;
 	private Timestamp updatedAt;
 	private Timestamp deletedAt;
+	private String foodType;
+	private float rating;
+	
 
 	public Menu() {}
 
@@ -22,7 +25,7 @@ public class Menu {
 			String description, double price,
 			boolean isAvailable, String category,String imagePath,
 			Timestamp createdAt, Timestamp updatedAt,
-			Timestamp deletedAt) {
+			Timestamp deletedAt, String foodType,float rating) {
 
 		this.menuId = menuId;
 		this.restaurantId = restaurantId;
@@ -35,6 +38,8 @@ public class Menu {
 		this.createdAt = createdAt;
 		this.updatedAt = updatedAt;
 		this.deletedAt = deletedAt;
+		this.foodType= foodType;
+		this.rating=rating;
 	}
 
 	
@@ -191,6 +196,22 @@ public class Menu {
 	 */
 	public void setDeletedAt(Timestamp deletedAt) {
 		this.deletedAt = deletedAt;
+	}
+	
+	public String getFoodType() {
+	    return foodType;
+	}
+
+	public void setFoodType(String foodType) {
+	    this.foodType = foodType;
+	}
+
+	public float getRating() {
+	    return rating;
+	}
+
+	public void setRating(float rating) {
+	    this.rating = rating;
 	}
 
 	@Override

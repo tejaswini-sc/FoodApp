@@ -100,7 +100,11 @@ public class MenuDAOimp implements MenuDAO {
 
 						res.getTimestamp("UpdatedAt"),
 
-						res.getTimestamp("DeletedAt")
+						res.getTimestamp("DeletedAt"),
+						
+						res.getString("food_type"),
+						
+						res.getFloat("rating")
 
 				);
 
@@ -138,7 +142,10 @@ public class MenuDAOimp implements MenuDAO {
 		                    res.getString("image_path"),
 		                    res.getTimestamp("CreatedAt"),
 		                    res.getTimestamp("UpdatedAt"),
-		                    res.getTimestamp("DeletedAt")
+		                    res.getTimestamp("DeletedAt"),
+		                    res.getString("food_type"),
+		                    res.getFloat("rating")
+		                    
 		            );
 
 		            list.add(m);
@@ -201,8 +208,10 @@ public class MenuDAOimp implements MenuDAO {
 			Timestamp createdAt = res.getTimestamp("CreatedAt");
 			Timestamp UpdatedAt = res.getTimestamp("UpdatedAt");
 			Timestamp deletedAt = res.getTimestamp("DeletedAt");
+			String foodType=res.getString("food_type");
+			float rating=res.getFloat("rating");
 			
-			m=new Menu(MenuId,RestId,ItemName,Desc,price,isAvail,Category,imagePath,createdAt,UpdatedAt,deletedAt);
+			m=new Menu(MenuId,RestId,ItemName,Desc,price,isAvail,Category,imagePath,createdAt,UpdatedAt,deletedAt,foodType,rating);
 		}
 		return m;
 
