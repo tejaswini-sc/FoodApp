@@ -5,16 +5,21 @@ public class CartItem {
 	private int menuId;
 	private int restaurantId;
 	private String name;
-	private float price;
+	private double price;
 	private int quantity;
+	private String imagePath;
+	private String foodType;
 	
-	public CartItem(int menuId, int restaurantId, String name, float price, int quantity) {
+	public CartItem(int menuId, int restaurantId, String name, double price, int quantity, String imagePath,
+	        String foodType) {
 		super();
 		this.menuId = menuId;
 		this.restaurantId = restaurantId;
 		this.name = name;
 		this.price = price;
 		this.quantity = quantity;
+		this.imagePath=imagePath;
+		this.foodType=foodType;		
 	}
 
 	/**
@@ -62,14 +67,14 @@ public class CartItem {
 	/**
 	 * @return the price
 	 */
-	public float getPrice() {
+	public double getPrice() {
 		return price;
 	}
 
 	/**
 	 * @param price the price to set
 	 */
-	public void setPrice(float price) {
+	public void setPrice(double price) {
 		this.price = price;
 	}
 
@@ -86,5 +91,34 @@ public class CartItem {
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
-		
+
+	/**
+	 * @return the imagePath
+	 */
+	public String getImagePath() {
+		return imagePath;
+	}
+
+	/**
+	 * @param imagePath the imagePath to set
+	 */
+	public void setImagePath(String imagePath) {
+		this.imagePath = imagePath;
+	}
+
+	/**
+	 * @return the foodType
+	 */
+	public String getFoodType() {
+		return foodType;
+	}
+
+	/**
+	 * @param foodType the foodType to set
+	 */
+	public void setFoodType(String foodType) {
+		this.foodType = foodType;
+	}
+
+	
 }

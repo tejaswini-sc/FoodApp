@@ -194,11 +194,16 @@ placeholder="Search dishes...">
 
 </h4>
 
-<button>
 
-Add To Cart
+<form action="callCartServlet" method="post">
+<input type="hidden" name="menuId" value="<%=menu.getMenuId() %>">
+<input type="hidden" name="quantity" value="1">
+<input type="hidden" name="restaurantId" value="<%=menu.getRestaurantId()%>">
+<input type="hidden" name="action" value="add">
+<button type="submit">Add To Cart</button>
+</form>
 
-</button>
+
 
 </div>
 

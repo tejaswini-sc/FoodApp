@@ -53,6 +53,7 @@ public class Menu {
 	/**
 	 * @param menuId the menuId to set
 	 */
+	
 	public void setMenuId(int menuId) {
 		this.menuId = menuId;
 	}
@@ -60,6 +61,8 @@ public class Menu {
 	/**
 	 * @return the restaurantId
 	 */
+	
+	
 	public int getRestaurantId() {
 		return restaurantId;
 	}
@@ -67,6 +70,7 @@ public class Menu {
 	/**
 	 * @param restaurantId the restaurantId to set
 	 */
+	
 	public void setRestaurantId(int restaurantId) {
 		this.restaurantId = restaurantId;
 	}
@@ -74,6 +78,7 @@ public class Menu {
 	/**
 	 * @return the itemName
 	 */
+	
 	public String getItemName() {
 		return itemName;
 	}
@@ -81,6 +86,7 @@ public class Menu {
 	/**
 	 * @param itemName the itemName to set
 	 */
+	
 	public void setItemName(String itemName) {
 		this.itemName = itemName;
 	}
@@ -88,6 +94,7 @@ public class Menu {
 	/**
 	 * @return the description
 	 */
+	
 	public String getDescription() {
 		return description;
 	}
@@ -102,6 +109,7 @@ public class Menu {
 	/**
 	 * @return the price
 	 */
+	
 	public double getPrice() {
 		return price;
 	}
@@ -109,6 +117,7 @@ public class Menu {
 	/**
 	 * @param price the price to set
 	 */
+	
 	public void setPrice(double price) {
 		this.price = price;
 	}
@@ -116,6 +125,7 @@ public class Menu {
 	/**
 	 * @return the isAvailable
 	 */
+	
 	public boolean isAvailable() {
 		return isAvailable;
 	}
