@@ -1,0 +1,261 @@
+.orders-header{
+
+    max-width:1400px;
+
+    margin:40px auto 20px;
+
+    padding:0 20px;
+
+}
+
+.details-container{
+
+    width:90%;
+
+    max-width:1250px;
+
+    margin:30px auto;
+
+    display:grid;
+
+    grid-template-columns:2fr 1fr;
+
+    gap:30px;
+
+}
+
+
+
+.item-card{
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    padding:25px;
+
+    max-width:900px;
+
+    margin-bottom:25px;
+}
+
+.food-img{
+
+    width:140px;
+
+    height:140px;
+
+    object-fit:cover;
+
+    border-radius:20px;
+
+   /* margin-right:20px;*/
+
+}
+
+
+
+.item-info{
+
+	   margin-left:25px;
+	
+    flex:1;
+
+}
+
+.item-info h3{
+
+    font-size:42px;
+
+    margin-bottom:15px;
+
+}
+
+.item-info p{
+
+    color:#666;
+
+    margin:8px 0;
+
+    font-size:22px;
+
+}
+
+.food-type{
+
+    display:inline-block;
+
+    background:#E8F5E9;
+
+    color:#2E7D32;
+
+    padding:8px 18px;
+
+    border-radius:20px;
+
+    font-size:16px;
+
+    margin-bottom:10px;
+
+}
+
+.item-total{
+
+    font-size:40px;
+
+    font-weight:700;
+
+    color:#45B649;
+
+}
+
+.details-container{
+
+    max-width:1400px;
+
+    margin:40px auto;
+
+    display:grid;
+
+    grid-template-columns:2fr 1fr;
+
+    gap:35px;
+
+    padding:20px;
+
+}
+
+.summary-card{
+
+    background:white;
+
+    border-radius:25px;
+
+    padding:35px;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+
+    position:sticky;
+
+    top:100px;
+
+}
+
+.summary-row{
+
+display:flex;
+
+justify-content:space-between;
+
+margin:20px 0;
+
+font-size:18px;
+
+}
+.food-img{
+
+    width:170px;
+    height:170px;
+    border-radius:20px;
+    object-fit:cover;
+
+}
+.food-type{
+
+display:inline-block;
+
+padding:6px 14px;
+
+border-radius:25px;
+
+font-size:13px;
+
+font-weight:600;
+
+margin:10px 0;
+
+}
+
+.veg{
+
+background:#E8F5E9;
+
+color:#2E7D32;
+
+}
+
+.nonveg{
+
+background:#FFEBEE;
+
+color:#C62828;
+
+}
+
+.status{
+
+padding:8px 18px;
+
+border-radius:30px;
+
+font-weight:600;
+
+}
+
+.summary-total{
+
+display:flex;
+
+justify-content:space-between;
+
+margin-top:25px;
+
+font-size:30px;
+
+font-weight:700;
+
+color:#4CAF50;
+
+}
+
+.order-meta{
+
+margin-top:10px;
+
+color:#777;
+
+font-size:18px;
+
+}
+
+.back-btn{
+
+width:100%;
+
+padding:16px;
+
+margin-top:30px;
+
+background:#8BC34A;
+
+color:white;
+
+border:none;
+
+border-radius:15px;
+
+font-size:18px;
+
+font-weight:600;
+
+cursor:pointer;
+
+transition:.3s;
+
+}
+
+.back-btn:hover{
+
+background:#6fa52d;
+
+}

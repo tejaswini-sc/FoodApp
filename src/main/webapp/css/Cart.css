@@ -614,3 +614,37 @@ body{
     }
 
 }
+
+.continue-shopping{
+
+    margin-top:10px;
+
+}
+
+.continue-shopping a{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    text-decoration:none;
+
+    color:#2E7D32;
+
+    font-size:17px;
+
+    font-weight:600;
+
+    transition:.3s;
+
+}
+
+.continue-shopping a:hover{
+
+    color:#8BC34A;
+
+    transform:translateX(-5px);
+
+}

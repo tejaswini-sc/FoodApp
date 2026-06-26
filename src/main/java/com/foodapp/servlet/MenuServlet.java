@@ -14,6 +14,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 @WebServlet("/menu")
 public class MenuServlet extends HttpServlet {
@@ -22,6 +23,9 @@ public class MenuServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		int restaurantId = Integer.parseInt(req.getParameter("restaurantId"));
+		
+		HttpSession session = req.getSession();
+		session.setAttribute("restaurantId", restaurantId);
 		
 		RestaurantDAOImp restaurantDao = new RestaurantDAOImp();
 

@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 
 <%@ page import="com.foodapp.model.Cart"%>
 <%@ page import="com.foodapp.model.CartItem"%>
@@ -15,19 +15,20 @@ double delivery = 0;
 double gst = 0;
 double total = 0;
 
-if(cart != null){
+if (cart != null) {
 
-    items = cart.getItems().values();
+	items = cart.getItems().values();
 
-    subtotal = cart.getTotalPrice();
+	subtotal = cart.getTotalPrice();
 
-    delivery = subtotal >= 500 ? 0 : 40;
+	delivery = (subtotal == 0 || subtotal >= 500) ? 0 : 40;
 
-    gst = subtotal * 0.05;
+	gst = subtotal * 0.05;
 
-    total = subtotal + delivery + gst;
+	total = subtotal + delivery + gst;
 }
 %>
+
 
 <!DOCTYPE html>
 <html>
@@ -44,338 +45,277 @@ if(cart != null){
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link
+	href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+	rel="stylesheet">
 
 <link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
 </head>
 
 <body>
 
-<!-- NAVBAR -->
+<!-- Navbar -->
 
-<nav>
+	<nav>
 
-<div class="logo">
+		<div class="logo">
 
-🍃 FoodCafe
+			<span class="logo-icon">🍃</span> <span>FoodCafe</span>
 
-</div>
+		</div>
+		<ul>
 
-<ul>
+			<li><a href="restaurants#home">Home</a></li>
 
-<li>Home</li>
+			<li><a href="restaurants">Restaurants</a></li>
 
-<li>Restaurants</li>
+			<li><a href="myOrders">Orders</a></li>
 
-<li>Orders</li>
+			<li><a href="Login.html">SignUp</a></li>
 
-<li>Profile</li>
+		</ul>
 
-</ul>
+		<div class="nav-icons">
 
-<div class="nav-icons">
+			<a href="cart" class="icon-btn cart-icon"> <i
+				class="fa-solid fa-cart-shopping"></i>
 
-<div class="icon-btn">
+			</a> <a href="Profile.jsp" class="icon-btn"> <i
+				class="fa-solid fa-user"></i>
 
-🛒
+			</a>
 
-</div>
+		</div>
 
-<div class="icon-btn">
+	</nav>
 
-👤
 
-</div>
 
-</div>
 
-</nav>
+	<!-- PAGE TITLE -->
 
+	<section class="cart-header">
 
-<!-- PAGE TITLE -->
+		<h1>🛒 Your Cart</h1>
 
-<section class="cart-header">
+		<p>Review your selected delicious meals before checkout.</p>
 
-<h1>
+	</section>
 
-🛒 Your Cart
 
-</h1>
+	<!-- MAIN CONTAINER -->
 
-<p>
+	<div class="cart-container">
 
-Review your selected delicious meals before checkout.
+		<div class="cart-items">
 
-</p>
+			<%
+			if (items == null || items.isEmpty()) {
+			%>
 
-</section>
+			<div class="empty-cart">
 
+				<img src="images/empty_cart.png">
 
-<!-- MAIN CONTAINER -->
+				<h2>🍽️ Nothing delicious here yet!</h2>
 
-<div class="cart-container">
+				<p>Browse our restaurants and add your favorite meals.</p>
 
-<div class="cart-items">
+				<a href="restaurants">
 
-<%
-if(items == null || items.isEmpty()){
-%>
+					<button class="shop-btn">Browse Restaurants</button>
 
-<div class="empty-cart">
+				</a>
 
-<img src="images/empty_cart.png">
+			</div>
 
-<h2>
+			<%
+			} else {
 
-🍽️ Nothing delicious here yet!
+			for (CartItem item : items) {
+			%>
 
-</h2>
+			<div class="cart-card">
 
-<p>
+				<img src="<%=item.getImagePath()%>">
 
-Browse our restaurants and add your favorite meals.
+				<div class="item-details">
 
-</p>
+					<h3>
 
-<a href="restaurants">
+						<%=item.getName()%>
 
-<button class="shop-btn">
+					</h3>
 
-Browse Restaurants
+					<div
+						class="food-type <%=item.getFoodType().equalsIgnoreCase("Veg") ? "veg" : "nonveg"%>">
 
-</button>
+						<%=item.getFoodType()%>
 
-</a>
+					</div>
 
-</div>
+					<h4>
 
-<%
-}
-else{
+						₹<%=String.format("%.2f", item.getPrice())%>
 
-for(CartItem item : items){
-%>
+						<span class="each"> each </span>
 
-<div class="cart-card">
+					</h4>
 
-<img src="<%=item.getImagePath()%>">
+					<p>
 
-<div class="item-details">
+						Subtotal : ₹<%=String.format("%.2f", item.getPrice() * item.getQuantity())%>
 
-<h3>
+					</p>
 
-<%=item.getName()%>
+				</div>
 
-</h3>
 
-<div class="food-type <%=item.getFoodType().equalsIgnoreCase("Veg") ? "veg" : "nonveg"%>">
+				<div class="quantity-box">
 
-<%=item.getFoodType()%>
+					<!-- Minus -->
 
-</div>
+					<form action="callCartServlet" method="post">
 
-<h4>
+						<input type="hidden" name="action" value="update"> <input
+							type="hidden" name="menuId" value="<%=item.getMenuId()%>">
 
-₹<%=String.format("%.2f",item.getPrice())%>
+						<input type="hidden" name="restaurantId"
+							value="<%=item.getRestaurantId()%>"> <input type="hidden"
+							name="quantity" value="<%=item.getQuantity() - 1%>">
 
-<span class="each">
+						<button type="submit">-</button>
 
-each
+					</form>
 
-</span>
+					<span> <%=item.getQuantity()%>
 
-</h4>
+					</span>
 
-<p>
+					<form action="callCartServlet" method="post">
 
-Subtotal :
+						<input type="hidden" name="action" value="update"> <input
+							type="hidden" name="menuId" value="<%=item.getMenuId()%>">
 
-₹<%=String.format("%.2f",item.getPrice()*item.getQuantity())%>
+						<input type="hidden" name="restaurantId"
+							value="<%=item.getRestaurantId()%>"> <input type="hidden"
+							name="quantity" value="<%=item.getQuantity() + 1%>">
 
-</p>
+						<button type="submit">+</button>
 
-</div>
+					</form>
 
+				</div>
 
-<div class="quantity-box">
 
-<!-- Minus -->
+				<div class="remove">
 
-<form action="callCartServlet" method="post">
+					<form action="callCartServlet" method="post">
 
-<input type="hidden" name="action" value="update">
+						<input type="hidden" name="action" value="delete"> <input
+							type="hidden" name="menuId" value="<%=item.getMenuId()%>">
 
-<input type="hidden" name="menuId"
-value="<%=item.getMenuId()%>">
+						<input type="hidden" name="restaurantId"
+							value="<%=item.getRestaurantId()%>">
 
-<input type="hidden" name="restaurantId"
-value="<%=item.getRestaurantId()%>">
+						<button class="remove-btn">
 
-<input type="hidden" name="quantity"
-value="<%=item.getQuantity()-1%>">
+							<i class="fa-solid fa-trash"></i>
 
-<button type="submit">
+						</button>
 
--
+					</form>
 
-</button>
+				</div>
 
-</form>
+			</div>
 
-<span>
+			<%
+			}
 
-<%=item.getQuantity()%>
+			}
+			%>
 
-</span>
+			<%
+			Integer restaurantId = (Integer) session.getAttribute("restaurantId");
+			%>
 
-<form action="callCartServlet" method="post">
+			<div class="continue-shopping">
 
-<input type="hidden" name="action" value="update">
+				<%
+				if (items != null && !items.isEmpty()) {
+				%>
 
-<input type="hidden" name="menuId"
-value="<%=item.getMenuId()%>">
+				<a href="menu?restaurantId=<%=restaurantId%>"> ← Continue
+					Ordering </a>
 
-<input type="hidden" name="restaurantId"
-value="<%=item.getRestaurantId()%>">
+				<%
+				}
+				%>
+			</div>
+		</div>
 
-<input type="hidden" name="quantity"
-value="<%=item.getQuantity()+1%>">
 
-<button type="submit">
+		<!-- ORDER SUMMARY -->
 
-+
+		<div class="summary-card">
 
-</button>
+			<h2>Order Summary</h2>
 
-</form>
+			<div class="summary-row">
 
-</div>
+				<span> Items Total </span> <span> ₹<%=String.format("%.2f", subtotal)%>
 
+				</span>
 
-<div class="remove">
+			</div>
 
-<form action="callCartServlet" method="post">
+			<div class="summary-row">
 
-<input type="hidden"
-name="action"
-value="delete">
+				<span> Delivery </span> <span> <%
+ String deliveryText;
 
-<input type="hidden"
-name="menuId"
-value="<%=item.getMenuId()%>">
+ if (subtotal == 0) {
+ 	deliveryText = "₹0";
+ } else if (delivery == 0) {
+ 	deliveryText = "FREE";
+ } else {
+ 	deliveryText = "₹" + String.format("%.2f", delivery);
+ }
+ %> <span><%=deliveryText%></span>
+				</span>
 
-<input type="hidden"
-name="restaurantId"
-value="<%=item.getRestaurantId()%>">
+			</div>
 
-<button class="remove-btn">
+			<div class="summary-row">
 
-<i class="fa-solid fa-trash"></i>
+				<span> GST (5%) </span> <span> ₹<%=String.format("%.2f", gst)%>
 
-</button>
+				</span>
 
-</form>
+			</div>
 
-</div>
+			<hr>
 
-</div>
+			<div class="summary-total">
 
-<%
-}
+				<span> Grand Total </span> <span> ₹<%=String.format("%.2f", total)%>
 
-}
-%>
+				</span>
 
-</div>
+			</div>
 
+			<a href="checkout">
 
-<!-- ORDER SUMMARY -->
+				<button class="checkout-btn">Proceed To Checkout</button>
 
-<div class="summary-card">
+			</a>
 
-<h2>
+		</div>
 
-Order Summary
-
-</h2>
-
-<div class="summary-row">
-
-<span>
-
-Items Total
-
-</span>
-
-<span>
-
-₹<%=String.format("%.2f",subtotal)%>
-
-</span>
-
-</div>
-
-<div class="summary-row">
-
-<span>
-
-Delivery
-
-</span>
-
-<span>
-
-<%=delivery==0?"FREE":"₹"+String.format("%.2f",delivery)%>
-
-</span>
-
-</div>
-
-<div class="summary-row">
-
-<span>
-
-GST (5%)
-
-</span>
-
-<span>
-
-₹<%=String.format("%.2f",gst)%>
-
-</span>
-
-</div>
-
-<hr>
-
-<div class="summary-total">
-
-<span>
-
-Grand Total
-
-</span>
-
-<span>
-
-₹<%=String.format("%.2f",total)%>
-
-</span>
-
-</div>
-
-<button class="checkout-btn">
-
-Proceed To Checkout
-
-</button>
-
-</div>
-
-</div>
+	</div>
 
 </body>
 

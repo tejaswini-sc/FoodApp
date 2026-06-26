@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    
-<%@ page import="java.util.List,com.foodapp.model.Restaurant" %>
+	pageEncoding="UTF-8"%>
+
+<%@ page import="java.util.List,com.foodapp.model.Restaurant"%>
 
 <!DOCTYPE html>
 <html>
@@ -11,340 +11,266 @@
 
 <title>Restaurants</title>
 
+<link rel="stylesheet" href="css/common.css">
+
 <link rel="stylesheet" href="css/restaurant.css">
+
+
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link
+	href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+	rel="stylesheet">
 <link rel="stylesheet"
-
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 </head>
 
 <body>
 
 
-<!-- Navbar -->
+	<!-- Navbar -->
 
-<nav>
+	<nav>
 
-<div class="logo">
+		<div class="logo">
 
-🍃 FoodCafe
+			<span class="logo-icon">🍃</span> <span>FoodCafe</span>
 
-</div>
+		</div>
+		<ul>
 
-<ul>
+			<li><a href="#home">Home</a></li>
 
-<li>Home</li>
+			<li><a href="#restaurant">Restaurants</a></li>
 
-<li>Restaurants</li>
+			<li><a href="myOrders">Orders</a></li>
 
-<li>Orders</li>
+			<li><a href="login">SignUp</a></li>
 
-<li>Profile</li>
+		</ul>
 
-</ul>
+		<div class="nav-icons">
 
-<div class="nav-icons">
+			<a href="cart" class="icon-btn cart-icon"> <i
+				class="fa-solid fa-cart-shopping"></i>
 
-<div class="icon-btn">
+			</a>
+			
+			 <a
+				href="Profile.jsp" class="icon-btn"> <i class="fa-solid fa-user"></i>
 
-<i class="fa-solid fa-cart-shopping"></i>
+			</a>
 
-</div>
+		</div>
 
-<div class="icon-btn">
+	</nav>
 
-<i class="fa-solid fa-user"></i>
 
-</div>
+	<!-- Hero Section -->
 
-</div>
+	<section id="home" class="hero">
 
-</nav>
+		<div class="hero-left">
 
+			<div class="tag">🔥 Trending Near You</div>
 
-<!-- Hero Section -->
+			<h1>DISCOVER DELICIOUS FOOD</h1>
 
-<section class="hero">
+			<p>Order from your favourite restaurants and enjoy premium meals.
 
-<div class="hero-left">
+			</p>
 
-<div class="tag">
+			<div class="search-box">
 
-🔥 Trending Near You
+				<input type="text" placeholder="Search restaurants...">
 
-</div>
+				<button>Search</button>
 
-<h1>
+			</div>
 
-DISCOVER
+		</div>
 
-DELICIOUS
+		<div class="hero-right">
 
-FOOD
+			<div class="food-cluster">
 
-</h1>
+				<div class="food center">🍽️</div>
 
-<p>
+				<div class="food top">
 
-Order from your favourite restaurants and enjoy premium meals.
+					<img src="images/menu/margherita_pizza.jpg">
 
-</p>
+				</div>
 
-<div class="search-box">
+				<div class="food left">
 
-<input type="text"
+					<img src="images/menu/whopper_burger.jpg">
 
-placeholder="Search restaurants...">
+				</div>
 
-<button>
+				<div class="food right">
 
-Search
+					<img src="images/menu/greek_salad.jpg">
 
-</button>
+				</div>
 
-</div>
+				<div class="food bottom-left">
 
-</div>
+					<img src="images/menu/cold_coffee.jpg">
 
-<div class="hero-right">
+				</div>
 
-<div class="food-cluster">
+				<div class="food bottom-right">
 
-<div class="food center">
+					<img src="images/menu/california_roll.jpg">
 
-🍽️
+				</div>
 
-</div>
+			</div>
 
-<div class="food top">
+		</div>
+	</section>
 
-<img src="images/menu/margherita_pizza.jpg">
 
-</div>
+	<section class="categories">
 
-<div class="food left">
+		<div class="chip">🍕 Pizza</div>
 
-<img src="images/menu/whopper_burger.jpg">
+		<div class="chip">🍔 Burger</div>
 
-</div>
+		<div class="chip">🍜 Asian</div>
 
-<div class="food right">
+		<div class="chip">☕ Cafe</div>
 
-<img src="images/menu/greek_salad.jpg">
+		<div class="chip">🥗 Healthy</div>
 
-</div>
+	</section>
 
-<div class="food bottom-left">
 
-<img src="images/menu/cold_coffee.jpg">
+	<!-- Restaurant Title -->
 
-</div>
+	<section class="restaurant-title">
 
-<div class="food bottom-right">
+		<h2>🔥 Popular Restaurants</h2>
 
-<img src="images/menu/california_roll.jpg">
+		<p>Explore restaurants from different cuisines.</p>
 
-</div>
+	</section>
 
-</div>
 
-</div>
-</section>
+	<!-- Restaurant Section -->
+	<section id="restaurant" class="restaurants">
 
+		<%
+		List<Restaurant> allResturant =
 
-<section class="categories">
+				(List<Restaurant>) request.getAttribute("allResturant");
 
-<div class="chip">
+		for (Restaurant restaurant : allResturant)
 
-🍕 Pizza
+		{
+		%>
 
-</div>
+		<div class="card">
 
-<div class="chip">
+			<div class="heart">
 
-🍔 Burger
+				<i class="fa-regular fa-heart"></i>
 
-</div>
+			</div>
 
-<div class="chip">
+			<div class="image-box">
 
-🍜 Asian
+				<img src="<%=restaurant.getImagePath()%>">
 
-</div>
+			</div>
 
-<div class="chip">
+			<h3>
 
-☕ Cafe
+				<%=restaurant.getName()%>
 
-</div>
+			</h3>
 
-<div class="chip">
+			<p>
 
-🥗 Healthy
+				<%=restaurant.getCuisineType()%>
 
-</div>
+			</p>
 
-</section>
+			<div class="details">
 
+				<span> ⭐ <%=restaurant.getRating()%>
 
-<!-- Restaurant Title -->
+				</span> <span> ⏱ <%=restaurant.getDeliveryTime()%> min
 
-<section class="restaurant-title">
+				</span>
 
-<h2>
+			</div>
 
-🔥 Popular Restaurants
+			<a href="menu?restaurantId=<%=restaurant.getResturantID()%>">
 
-</h2>
+				<button>View Menu</button>
 
-<p>
+			</a>
 
-Explore restaurants from different cuisines.
+		</div>
 
-</p>
+		<%
+		}
+		%>
 
-</section>
+	</section>
 
+	<footer>
 
-<!-- Restaurant Section -->
-<section class="restaurants">
+		<div class="footer-container">
 
-<%
+			<div class="footer-left">
 
-List<Restaurant> allResturant=
+				<h2>🍃 FoodCafe</h2>
 
-(List<Restaurant>)
+				<p>Crafting delicious experiences one meal at a time.</p>
 
-request.getAttribute("allResturant");
+			</div>
 
-for(Restaurant restaurant : allResturant)
+			<div class="footer-links">
 
-{
+				<h3>Quick Links</h3>
 
-%>
+				<ul>
 
-<div class="card">
+					<li>Home</li>
 
-<div class="heart">
+					<li>Restaurants</li>
 
-<i class="fa-regular fa-heart"></i>
+					<li>Orders</li>
 
-</div>
+					<li>Profile</li>
 
-<div class="image-box">
+				</ul>
 
-<img src="<%=restaurant.getImagePath()%>">
+			</div>
 
-</div>
+			<div class="footer-contact">
 
-<h3>
+				<h3>Contact</h3>
 
-<%=restaurant.getName()%>
+				<p>📍 Karnataka, India</p>
 
-</h3>
+				<p>📧 foodcafe@gmail.com</p>
 
-<p>
+				<p>📞 +91 9876543210</p>
 
-<%=restaurant.getCuisineType()%>
+			</div>
 
-</p>
+		</div>
 
-<div class="details">
+		<hr>
 
-<span>
+		<p class="copyright">© 2026 FoodCafe | Made with ❤️</p>
 
-⭐ <%=restaurant.getRating()%>
-
-</span>
-
-<span>
-
-⏱ <%=restaurant.getDeliveryTime()%> min
-
-</span>
-
-</div>
-
-<a href="menu?restaurantId=<%=restaurant.getResturantID()%>">
-
-<button>
-
-View Menu
-
-</button>
-
-</a>
-
-</div>
-
-<%
-
-}
-
-%>
-
-</section>
-
-<footer>
-
-<div class="footer-container">
-
-<div class="footer-left">
-
-<h2>🍃 FoodCafe</h2>
-
-<p>
-
-Crafting delicious experiences one meal at a time.
-
-</p>
-
-</div>
-
-<div class="footer-links">
-
-<h3>Quick Links</h3>
-
-<ul>
-
-<li>Home</li>
-
-<li>Restaurants</li>
-
-<li>Orders</li>
-
-<li>Profile</li>
-
-</ul>
-
-</div>
-
-<div class="footer-contact">
-
-<h3>Contact</h3>
-
-<p>📍 Karnataka, India</p>
-
-<p>📧 foodcafe@gmail.com</p>
-
-<p>📞 +91 9876543210</p>
-
-</div>
-
-</div>
-
-<hr>
-
-<p class="copyright">
-
-© 2026 FoodCafe | Made with ❤️
-
-</p>
-
-</footer>
+	</footer>
 
 
 

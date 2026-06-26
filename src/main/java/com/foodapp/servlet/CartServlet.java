@@ -68,20 +68,28 @@ public class CartServlet extends HttpServlet {
 	
 	private void removeItemFromcart(HttpServletRequest req, Cart cart) {
 		
+		HttpSession session = req.getSession();
+
 		int menuId = Integer.parseInt(req.getParameter("menuId"));
 
 	    cart.removeItem(menuId);
+	    if(cart.getItems().isEmpty()) {
+	        session.removeAttribute("restaurantId");
+	    }
 	}
 
 	private void updateCart(HttpServletRequest req, Cart cart) {
 		 		
-		    
+			HttpSession session = req.getSession();
 		    
 		    int menuId = Integer.parseInt(req.getParameter("menuId"));
 
 		    int quantity = Integer.parseInt(req.getParameter("quantity"));
 
 		    cart.updateItem(menuId, quantity);
+		    if(cart.getItems().isEmpty()) {
+		        session.removeAttribute("restaurantId");
+		    }
 	}
 
 	

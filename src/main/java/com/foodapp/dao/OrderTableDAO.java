@@ -6,7 +6,7 @@ import com.foodapp.model.OrderTable;
 
 public interface OrderTableDAO {
 	
-	void addOrder(OrderTable order);
+	int addOrder(OrderTable order);
 	OrderTable getOrderById(int orderId);
 	List<OrderTable> getAllOrder();
 	List<OrderTable> getOrderByUserId(int UserId);

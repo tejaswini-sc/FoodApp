@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ page import="java.util.List,com.foodapp.model.Menu" %>
-    
-    
-    <%@ page import="com.foodapp.model.Restaurant"%>
-    
+	pageEncoding="UTF-8"%>
+<%@ page import="java.util.List,com.foodapp.model.Menu"%>
+
+
+<%@ page import="com.foodapp.model.Restaurant"%>
+
 <!DOCTYPE html>
 <html>
 
@@ -19,275 +19,213 @@
 <link rel="stylesheet" href="css/Menu.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link
+	href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+	rel="stylesheet">
 
 <link rel="stylesheet"
-
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
 <link rel="stylesheet"
-
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 </head>
 
 <body>
 
 
-<!-- Navbar -->
+	<!-- Navbar -->
 
-<nav>
+	<nav>
 
-<div class="logo">
+		<div class="logo">
 
-🍃 FoodCafe
+			<span class="logo-icon">🍃</span> <span>FoodCafe</span>
 
-</div>
+		</div>
+		<ul>
 
-<ul>
+			<li><a href="home">Home</a></li>
 
-<li>Home</li>
+			<li><a href="restaurants">Restaurants</a></li>
 
-<li>Restaurants</li>
+			<li><a href="myOrders">Orders</a></li>
 
-<li>Orders</li>
+			<li><a href="login">SignUp</a></li>
 
-<li>Profile</li>
+		</ul>
 
-</ul>
+		<div class="nav-icons">
 
-<div class="nav-icons">
+			<a href="cart" class="icon-btn cart-icon"> <i
+				class="fa-solid fa-cart-shopping"></i>
 
-<div class="icon-btn">
+			</a> <a href="Profile.jsp" class="icon-btn"> <i
+				class="fa-solid fa-user"></i>
 
-🛒
+			</a>
 
-</div>
+		</div>
 
-<div class="icon-btn">
+	</nav>
 
-👤
 
-</div>
+	<%
+	Restaurant restaurant =
 
-</div>
+			(Restaurant)
 
-</nav>
+			request.getAttribute("restaurant");
+	%>
 
-<%
+	<!-- Hero -->
 
-Restaurant restaurant=
+	<section class="menu-hero">
 
-(Restaurant)
+		<div class="tag">🍽️ Chef's Recommendation</div>
 
-request.getAttribute("restaurant");
+		<h1>Find Your Favourite Meal</h1>
 
-%>
+		<p>Freshly prepared meals crafted with premium ingredients.</p>
 
-<!-- Hero -->
+		<div class="menu-search">
 
-<section class="menu-hero">
+			<input type="text" placeholder="Search dishes...">
 
-<div class="tag">
+		</div>
 
-🍽️ Chef's Recommendation
+		<div class="restaurant-name">
 
-</div>
+			🍽️
+			<%=restaurant.getName()%>
 
-<h1>
+		</div>
 
-Find Your
+	</section>
 
-Favourite Meal
+	<!-- Menu Items -->
 
-</h1>
+	<section class="menu-container">
 
-<p>
-
-Freshly prepared meals crafted with premium ingredients.
-
-</p>
-
-<div class="menu-search">
-
-<input
-
-type="text"
-
-placeholder="Search dishes...">
-
-</div>
-
-<div class="restaurant-name">
-
-🍽️ <%=restaurant.getName()%>
-
-</div>
-
-</section>
-
-<!-- Menu Items -->
-
-<section class="menu-container">
-
-<% List<Menu> menuByRestaurant=(List<Menu>)request.getAttribute("menuByRestaurant"); 
-	for(Menu menu:menuByRestaurant){
-		%>
-<div class="food-card">
-
-<div class="image-box">
-
-<img src="<%=menu.getImagePath()%>">
-
-</div>
-
-<div class="food-info">
-
-<div class="food-top">
-
-<span class="category">
-
-<%=menu.getCategory()%>
-
-</span>
-
-<div class="heart">
-
-<i class="fa-regular fa-heart"></i>
-
-</div>
-
-</div>
-
-<h3>
-
-<%=menu.getItemName()%>
-
-</h3>
-
-<div class="food-meta">
-
-<span class="food-type">
-
-<%=menu.getFoodType()%>
-
-</span>
-
-<span class="food-rating">
-
-⭐ <%=menu.getRating()%>
-
-</span>
-
-</div>
-
-<p>
-
-<%=menu.getDescription()%>
-
-</p>
-
-<div class="price-row">
-
-<h4>
-
-₹<%=menu.getPrice()%>
-
-</h4>
-
-
-<form action="callCartServlet" method="post">
-<input type="hidden" name="menuId" value="<%=menu.getMenuId() %>">
-<input type="hidden" name="quantity" value="1">
-<input type="hidden" name="restaurantId" value="<%=menu.getRestaurantId()%>">
-<input type="hidden" name="action" value="add">
-<button type="submit">Add To Cart</button>
-</form>
-
-
-
-</div>
-
-</div>
-
-</div>
-		
 		<%
-	}
-	
-%>
+		List<Menu> menuByRestaurant = (List<Menu>) request.getAttribute("menuByRestaurant");
+		for (Menu menu : menuByRestaurant) {
+		%>
+		<div class="food-card">
+
+			<div class="image-box">
+
+				<img src="<%=menu.getImagePath()%>">
+
+			</div>
+
+			<div class="food-info">
+
+				<div class="food-top">
+
+					<span class="category"> <%=menu.getCategory()%>
+
+					</span>
+
+					<div class="heart">
+
+						<i class="fa-regular fa-heart"></i>
+
+					</div>
+
+				</div>
+
+				<h3>
+
+					<%=menu.getItemName()%>
+
+				</h3>
+
+				<div class="food-meta">
+
+					<span class="food-type"> <%=menu.getFoodType()%>
+
+					</span> <span class="food-rating"> ⭐ <%=menu.getRating()%>
+
+					</span>
+
+				</div>
+
+				<p>
+
+					<%=menu.getDescription()%>
+
+				</p>
+
+				<div class="price-row">
+
+					<h4>
+
+						₹<%=menu.getPrice()%>
+
+					</h4>
 
 
-</section>
+					<form action="callCartServlet" method="post">
+						<input type="hidden" name="menuId" value="<%=menu.getMenuId()%>">
+						<input type="hidden" name="quantity" value="1"> <input
+							type="hidden" name="restaurantId"
+							value="<%=menu.getRestaurantId()%>"> <input type="hidden"
+							name="action" value="add">
+						<button type="submit">Add To Cart</button>
+					</form>
 
-<footer>
 
-<div class="footer-container">
 
-<div class="footer-left">
+				</div>
 
-<h2>
+			</div>
 
-🍃 FoodCafe
+		</div>
 
-</h2>
+		<%
+		}
+		%>
 
-<p>
 
-Crafting delicious experiences one meal at a time.
+	</section>
 
-</p>
+	<footer>
 
-</div>
+		<div class="footer-container">
 
-<div class="footer-links">
+			<div class="footer-left">
 
-<h3>
+				<h2>🍃 FoodCafe</h2>
 
-Quick Links
+				<p>Crafting delicious experiences one meal at a time.</p>
 
-</h3>
+			</div>
 
-<ul>
+			<div class="footer-links">
 
-<li>
+				<h3>Quick Links</h3>
 
-Home
+				<ul>
 
-</li>
+					<li>Home</li>
 
-<li>
+					<li>Restaurants</li>
 
-Restaurants
+					<li>About</li>
 
-</li>
+					<li>Contact</li>
 
-<li>
+				</ul>
 
-About
+			</div>
 
-</li>
+		</div>
 
-<li>
+		<hr>
 
-Contact
+		<p class="copyright">© 2026 FoodCafe | Made with ❤️</p>
 
-</li>
-
-</ul>
-
-</div>
-
-</div>
-
-<hr>
-
-<p class="copyright">
-
-© 2026 FoodCafe | Made with ❤️
-
-</p>
-
-</footer>
+	</footer>
 
 </body>
 

@@ -1,0 +1,459 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Poppins',sans-serif;
+    background:#f7faf7;
+    color:#222;
+}
+
+/* ===========================
+        PAGE HEADER
+=========================== */
+
+.checkout-header{
+
+    max-width:1200px;
+
+    margin:50px auto 30px;
+
+    text-align:center;
+
+}
+
+.checkout-header h1{
+
+    font-size:46px;
+
+    font-weight:700;
+
+    margin-bottom:10px;
+
+}
+
+.checkout-header p{
+
+    color:#777;
+
+    font-size:18px;
+
+}
+
+/* ===========================
+        MAIN CONTAINER
+=========================== */
+
+.checkout-container{
+
+    max-width:1300px;
+
+    margin:40px auto;
+
+    padding:0 20px;
+
+}
+
+/* ===========================
+          FORM
+=========================== */
+
+.checkout-form{
+
+    background:#fff;
+
+    border-radius:25px;
+
+    padding:40px;
+
+    box-shadow:0 12px 35px rgba(0,0,0,.08);
+
+}
+
+.checkout-form form{
+
+    display:grid;
+
+    grid-template-columns:2fr 1fr;
+
+    gap:40px;
+
+}
+
+/* ===========================
+      LEFT SIDE
+=========================== */
+
+.form-section{
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+.checkout-form h2{
+
+    font-size:28px;
+
+    margin-bottom:25px;
+
+    color:#222;
+
+}
+
+/* ===========================
+      INPUTS
+=========================== */
+
+.input-group{
+
+    margin-bottom:22px;
+
+}
+
+.input-group label{
+
+    display:block;
+
+    margin-bottom:8px;
+
+    font-weight:600;
+
+    color:#555;
+
+}
+
+.input-group input,
+
+.input-group textarea{
+
+    width:100%;
+
+    padding:15px 18px;
+
+    border:1px solid #ddd;
+
+    border-radius:15px;
+
+    font-size:16px;
+
+    transition:.3s;
+
+    outline:none;
+
+    font-family:'Poppins',sans-serif;
+
+}
+
+.input-group textarea{
+
+    resize:none;
+
+}
+
+.input-group input:focus,
+
+.input-group textarea:focus{
+
+    border-color:#8BC34A;
+
+    box-shadow:0 0 10px rgba(139,195,74,.15);
+
+}
+
+/* ===========================
+        INPUT ROW
+=========================== */
+
+.input-row{
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:20px;
+
+}
+
+/* ===========================
+      PAYMENT
+=========================== */
+
+.payment-box{
+
+    background:#f9f9f9;
+
+    padding:25px;
+
+    border-radius:20px;
+
+    margin-top:20px;
+
+}
+
+.payment-box label{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    margin-bottom:18px;
+
+    font-size:17px;
+
+    cursor:pointer;
+
+}
+
+.payment-box input[type="radio"]{
+
+    transform:scale(1.2);
+
+    accent-color:#8BC34A;
+
+}
+
+
+/* ===========================
+        ORDER SUMMARY
+=========================== */
+
+.summary-card{
+
+    background:#ffffff;
+
+    border-radius:24px;
+
+    padding:30px;
+
+    box-shadow:0 12px 35px rgba(0,0,0,.08);
+
+    height:fit-content;
+
+    position:sticky;
+
+    top:110px;
+
+}
+
+.summary-card h2{
+
+    font-size:28px;
+
+    margin-bottom:25px;
+
+}
+
+.summary-row{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin:18px 0;
+
+    font-size:17px;
+
+    color:#555;
+
+}
+
+.summary-card hr{
+
+    border:none;
+
+    border-top:1px solid #e5e5e5;
+
+    margin:25px 0;
+
+}
+
+.summary-total{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    font-size:23px;
+
+    font-weight:700;
+
+    margin-bottom:30px;
+
+    color:#222;
+
+}
+
+/* ===========================
+      PLACE ORDER BUTTON
+=========================== */
+
+.place-order-btn{
+
+    width:100%;
+
+    border:none;
+
+    background:#8BC34A;
+
+    color:#fff;
+
+    padding:16px;
+
+    border-radius:50px;
+
+    font-size:18px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+.place-order-btn:hover{
+
+    background:#76b137;
+
+    transform:translateY(-3px);
+
+    box-shadow:0 12px 25px rgba(139,195,74,.35);
+
+}
+
+/* ===========================
+        ANIMATION
+=========================== */
+
+.checkout-form,
+
+.summary-card{
+
+    animation:fadeIn .5s ease;
+
+}
+
+@keyframes fadeIn{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(20px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+/* ===========================
+      RESPONSIVE
+=========================== */
+
+@media(max-width:1000px){
+
+.checkout-form form{
+
+    grid-template-columns:1fr;
+
+}
+
+.summary-card{
+
+    position:static;
+
+}
+
+}
+
+@media(max-width:768px){
+
+.checkout-header h1{
+
+    font-size:36px;
+
+}
+
+.checkout-header p{
+
+    font-size:16px;
+
+}
+
+.checkout-form{
+
+    padding:25px;
+
+}
+
+.input-row{
+
+    grid-template-columns:1fr;
+
+}
+
+.summary-card{
+
+    margin-top:25px;
+
+}
+
+}
+
+@media(max-width:500px){
+
+.checkout-header{
+
+    margin-top:30px;
+
+}
+
+.checkout-header h1{
+
+    font-size:30px;
+
+}
+
+.checkout-form{
+
+    padding:20px;
+
+}
+
+.checkout-form h2{
+
+    font-size:24px;
+
+}
+
+.summary-total{
+
+    font-size:20px;
+
+}
+
+.place-order-btn{
+
+    font-size:16px;
+
+}
+
+}
+

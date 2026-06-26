@@ -18,38 +18,6 @@ overflow-x:hidden;
 
 }
 
-nav{
-
-height:90px;
-
-padding:0 80px;
-
-display:flex;
-
-justify-content:space-between;
-
-align-items:center;
-
-}
-
-.logo{
-
-font-size:32px;
-
-font-weight:700;
-
-}
-
-nav ul{
-
-display:flex;
-
-gap:40px;
-
-list-style:none;
-
-}
-
 .hero{
 
 display:flex;
@@ -514,13 +482,6 @@ cursor:pointer;
 }*/
 
 
-.nav-icons{
-
-display:flex;
-
-gap:15px;
-
-}
 
 .icon-btn{
 
@@ -548,15 +509,6 @@ transition:.3s;
 
 }
 
-.icon-btn:hover{
-
-background:#8BC34A;
-
-color:white;
-
-transform:translateY(-4px);
-
-}
 
 .tag{
 

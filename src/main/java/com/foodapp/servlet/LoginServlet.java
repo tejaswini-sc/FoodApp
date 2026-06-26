@@ -17,36 +17,28 @@ import jakarta.servlet.http.HttpSession;
 @WebServlet("/login")
 
 public class LoginServlet extends HttpServlet {
-	
+
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-	
+
 		String email = req.getParameter("email");
 		String password = req.getParameter("password");
-		
+
 		UserDaoImp userDaoImp = new UserDaoImp();
 		User user = userDaoImp.getUserByEmail(email);
-		
-		if(user != null &&
-				BCrypt.checkpw(password,
-						user.getPassword())) {
 
-			HttpSession session =
-					req.getSession();
+		if (user != null && BCrypt.checkpw(password, user.getPassword())) {
 
-			session.setAttribute(
-					"loggedInUser",
-					user
-			);
+			HttpSession session = req.getSession();
 
+			session.setAttribute("user", user);
 			resp.sendRedirect("restaurants");
 
-		}
-		else {
+		} else {
 
 			resp.sendRedirect("Login.html");
 
 		}
-	
+
 	}
 }
