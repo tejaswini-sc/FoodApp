@@ -21,7 +21,9 @@ public class LoginServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-		String email = req.getParameter("email");
+		
+		
+	String email = req.getParameter("email");
 		String password = req.getParameter("password");
 
 		UserDaoImp userDaoImp = new UserDaoImp();
@@ -32,13 +34,20 @@ public class LoginServlet extends HttpServlet {
 			HttpSession session = req.getSession();
 
 			session.setAttribute("user", user);
-			resp.sendRedirect("restaurants");
+
+			if ("admin".equalsIgnoreCase(user.getRole())) {
+				resp.sendRedirect(req.getContextPath() + "/admin/dashboard");
+			} else {
+				resp.sendRedirect(req.getContextPath() + "/restaurants");
+			}
 
 		} else {
 
-			resp.sendRedirect("Login.html");
+			resp.sendRedirect(req.getContextPath() + "/Login.html");
 
 		}
+		
+		
 
 	}
 }

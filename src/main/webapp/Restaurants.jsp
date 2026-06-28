@@ -58,7 +58,7 @@
 
 			<li><a href="myOrders">Orders</a></li>
 
-			<li><a href="login">SignUp</a></li>
+			<li><a href="Login.html">SignUp</a></li>
 
 		</ul>
 
@@ -106,7 +106,15 @@
 					</div>
 
 					<a href="myOrders"> 📦 My Orders </a> <a href="Profile.jsp"> 👤
-						My Profile </a> <a href="logout"> 🚪 Logout </a>
+						My Profile </a>
+						<%
+						if (user != null && "admin".equalsIgnoreCase(user.getRole())) {
+						%>
+					<a href="<%=request.getContextPath()%>/admin/dashboard"> ⚙️ Admin Dashboard </a>
+						<%
+						}
+						%>
+					<a href="<%=request.getContextPath()%>/logout"> 🚪 Logout </a>
 
 				</div>
 

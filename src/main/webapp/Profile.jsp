@@ -112,7 +112,15 @@ if (user == null) {
 					</div>
 
 					<a href="myOrders"> 📦 My Orders </a> <a href="Profile.jsp"> 👤
-						My Profile </a> <a href="logout"> 🚪 Logout </a>
+						My Profile </a>
+						<%
+						if ("admin".equalsIgnoreCase(user.getRole())) {
+						%>
+					<a href="<%=request.getContextPath()%>/admin/dashboard"> ⚙️ Admin Dashboard </a>
+						<%
+						}
+						%>
+					<a href="<%=request.getContextPath()%>/logout"> 🚪 Logout </a>
 
 				</div>
 
@@ -159,7 +167,15 @@ if (user == null) {
 
 			<div class="profile-actions">
 
-				<a href="myOrders" class="btn"> 📦 My Orders </a> <a href="logout"
+				<a href="myOrders" class="btn"> 📦 My Orders </a>
+				<%
+				if ("admin".equalsIgnoreCase(user.getRole())) {
+				%>
+				<a href="<%=request.getContextPath()%>/admin/dashboard" class="btn"> ⚙️ Admin Dashboard </a>
+				<%
+				}
+				%>
+				<a href="<%=request.getContextPath()%>/logout"
 					class="btn logout"> 🚪 Logout </a>
 
 			</div>

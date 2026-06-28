@@ -82,7 +82,7 @@ public class RestaurantDAOImp implements RestaurantDAO {
                 r = new Restaurant();
 
                 r.setResturantID(rs.getInt("RestaurantID"));
-                r.setName(rs.getString("name"));
+                r.setName(rs.getString("Name"));
                 r.setCuisineType(rs.getString("CuisineType"));
                 r.setDeliveryTime(rs.getInt("DeliveryTime"));
                 r.setAddress(rs.getString("Address"));

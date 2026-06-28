@@ -23,10 +23,9 @@ public class RegisterServlet extends HttpServlet{
 			String email = req.getParameter("email");
 			String password = req.getParameter("password");
 			String address = req.getParameter("address");
-			String role = req.getParameter("role");
 			
 			String hashpw = BCrypt.hashpw(password, BCrypt.gensalt(12));
-			User user = new User(userName, hashpw, email, address, role);
+			User user = new User(userName, hashpw, email, address, "customer");
 			UserDaoImp userDaoImp = new UserDaoImp();
 			int res = userDaoImp.addUser(user);
 			

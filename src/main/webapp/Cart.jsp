@@ -59,7 +59,6 @@ if (cart != null) {
 	<%@page import="com.foodapp.model.Cart"%>
 
 	<%
-	Cart cart = (Cart) session.getAttribute("cart");
 
 	int cartCount = 0;
 
