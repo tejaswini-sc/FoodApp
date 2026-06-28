@@ -46,6 +46,7 @@ double totalRevenue = (Double) request.getAttribute("totalRevenue");
 		<ul>
 			<li><a href="<%=ctx%>/admin/dashboard" class="active">Dashboard</a></li>
 			<li><a href="<%=ctx%>/admin/restaurants">Restaurants</a></li>
+			<li><a href="<%=ctx%>/admin/menu">Menu</a></li>
 			<li><a href="<%=ctx%>/admin/orders">Orders</a></li>
 			<li><a href="<%=ctx%>/restaurants">View Site</a></li>
 		</ul>

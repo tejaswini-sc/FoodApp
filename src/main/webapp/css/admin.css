@@ -470,6 +470,14 @@ color:#1565C0;
 
 }
 
+.action-btn.menu{
+
+background:#E8F5E9;
+
+color:#2E7D32;
+
+}
+
 .action-btn.toggle{
 
 background:#FFF3E0;
@@ -491,5 +499,11 @@ color:#C62828;
 color:#777;
 
 padding:20px 0;
+
+}
+
+.restaurant-picker{
+
+max-width:400px;
 
 }

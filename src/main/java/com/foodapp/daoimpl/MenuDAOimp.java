@@ -15,10 +15,10 @@ import com.foodapp.utility.DBConnection;
 
 public class MenuDAOimp implements MenuDAO {
 
-	private static final String Insert_Query = "Insert into menu(RestaurantId,ItemName,Description,Price,IsAvailable,Category,image_path) values(?,?,?,?,?,?,?)";
+	private static final String Insert_Query = "Insert into menu(RestaurantId,ItemName,Description,Price,IsAvailable,Category,image_path,food_type,rating) values(?,?,?,?,?,?,?,?,?)";
 	private static final String Select_By_Id = "Select * from menu where MenuId=?";
 	private static final String select_All_Query = "Select * from Menu";
-	private static final String Update_Query = "Update Menu set RestaurantId=?,ItemName=?,Description=?,Price=?,IsAvailable=?,Category=? where menuId=?";
+	private static final String Update_Query = "Update Menu set RestaurantId=?,ItemName=?,Description=?,Price=?,IsAvailable=?,Category=?,image_path=?,food_type=?,rating=? where menuId=?";
 	private static final String Delete_Query = "Delete from menu where menuId=?";
 	private static final String Select_By_RestauranyId = "Select * from menu where RestaurantId=?";
 	Connection con=DBConnection.getConnection();
@@ -36,6 +36,8 @@ public class MenuDAOimp implements MenuDAO {
 			pstmt.setBoolean(5, m.isAvailable());
 			pstmt.setString(6, m.getCategory());
 			pstmt.setString(7, m.getImagePath());
+			pstmt.setString(8, m.getFoodType());
+			pstmt.setFloat(9, m.getRating());
 			i = pstmt.executeUpdate();
 			System.out.println(i);		
 			
@@ -169,7 +171,10 @@ public class MenuDAOimp implements MenuDAO {
 			pstmt.setDouble(4, m.getPrice());
 			pstmt.setBoolean(5, m.isAvailable());
 			pstmt.setString(6, m.getCategory());
-			pstmt.setInt(7, m.getMenuId());
+			pstmt.setString(7, m.getImagePath());
+			pstmt.setString(8, m.getFoodType());
+			pstmt.setFloat(9, m.getRating());
+			pstmt.setInt(10, m.getMenuId());
 			i = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

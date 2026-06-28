@@ -40,6 +40,7 @@ List<Restaurant> allResturant = (List<Restaurant>) request.getAttribute("allRest
 		<ul>
 			<li><a href="<%=ctx%>/admin/dashboard">Dashboard</a></li>
 			<li><a href="<%=ctx%>/admin/restaurants" class="active">Restaurants</a></li>
+			<li><a href="<%=ctx%>/admin/menu">Menu</a></li>
 			<li><a href="<%=ctx%>/admin/orders">Orders</a></li>
 			<li><a href="<%=ctx%>/restaurants">View Site</a></li>
 		</ul>
@@ -168,6 +169,9 @@ List<Restaurant> allResturant = (List<Restaurant>) request.getAttribute("allRest
 
 								<a href="<%=ctx%>/admin/restaurants?restaurantId=<%=restaurant.getResturantID()%>"
 									class="action-btn edit">Edit</a>
+
+								<a href="<%=ctx%>/admin/menu?restaurantId=<%=restaurant.getResturantID()%>"
+									class="action-btn menu">Menu</a>
 
 								<form action="<%=ctx%>/admin/restaurants" method="post"
 									class="inline-form">
