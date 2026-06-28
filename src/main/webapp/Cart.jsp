@@ -56,7 +56,21 @@ if (cart != null) {
 
 <body>
 
-<!-- Navbar -->
+	<%@page import="com.foodapp.model.Cart"%>
+
+	<%
+	Cart cart = (Cart) session.getAttribute("cart");
+
+	int cartCount = 0;
+
+	if (cart != null) {
+
+		cartCount = cart.getTotalItems();
+
+	}
+	%>
+
+	<!-- Navbar -->
 
 	<nav>
 
@@ -80,9 +94,16 @@ if (cart != null) {
 		<div class="nav-icons">
 
 			<a href="cart" class="icon-btn cart-icon"> <i
-				class="fa-solid fa-cart-shopping"></i>
+				class="fa-solid fa-cart-shopping"></i> <%
+ if (cartCount > 0) {
+ %> <span
+				class="cart-badge"> <%=cartCount%>
 
-			</a> <a href="Profile.jsp" class="icon-btn"> <i
+			</span> <%
+ }
+ %>
+
+			</a> </a> <a href="Profile.jsp" class="icon-btn"> <i
 				class="fa-solid fa-user"></i>
 
 			</a>

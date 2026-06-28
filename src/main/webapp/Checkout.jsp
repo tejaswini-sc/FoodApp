@@ -41,27 +41,54 @@ double total = subtotal + delivery + gst;
 
 	<!-- NAVBAR -->
 
+
+	<%@page import="com.foodapp.model.Cart"%>
+
+	<%
+	int cartCount = 0;
+
+	if (cart != null) {
+
+		cartCount = cart.getTotalItems();
+
+	}
+	%>
+
 	<nav>
 
-		<div class="logo">🍃 FoodCafe</div>
+		<div class="logo">
 
+			<span class="logo-icon">🍃</span> <span>FoodCafe</span>
+
+		</div>
 		<ul>
 
-			<li>Home</li>
+			<li><a href="restaurants#home">Home</a></li>
 
-			<li>Restaurants</li>
+			<li><a href="restaurants#restaurant">Restaurants</a></li>
 
-			<li>Orders</li>
+			<li><a href="myOrders">Orders</a></li>
 
-			<li>Profile</li>
+			<li><a href="login">SignUp</a></li>
 
 		</ul>
 
 		<div class="nav-icons">
 
-			<div class="icon-btn">🛒</div>
+			<a href="cart" class="icon-btn cart-icon"> <i
+				class="fa-solid fa-cart-shopping"></i> <%
+ if (cartCount > 0) {
+ %> <span
+				class="cart-badge"> <%=cartCount%>
 
-			<div class="icon-btn">👤</div>
+			</span> <%
+ }
+ %>
+
+			</a> </a> <a href="Profile.jsp" class="icon-btn"> <i
+				class="fa-solid fa-user"></i>
+
+			</a>
 
 		</div>
 
@@ -130,8 +157,8 @@ double total = subtotal + delivery + gst;
 
 					<div class="payment-box">
 
-						<label> <input type="radio" name="payment"
-							value="Cash" checked> Cash On Delivery
+						<label> <input type="radio" name="payment" value="Cash"
+							checked> Cash On Delivery
 
 						</label> <label> <input type="radio" name="payment" value="UPI">
 

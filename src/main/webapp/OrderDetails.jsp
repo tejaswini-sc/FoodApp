@@ -43,6 +43,21 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
 <body>
 
 	<!-- Navbar -->
+	
+	<%@page import="com.foodapp.model.Cart"%>
+
+<%
+Cart cart = (Cart)session.getAttribute("cart");
+
+int cartCount = 0;
+
+if(cart != null){
+
+    cartCount = cart.getTotalItems();
+
+}
+%>
+	
 
 	<nav>
 
@@ -65,9 +80,21 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
 
 		<div class="nav-icons">
 
-			<a href="cart" class="icon-btn cart-icon"> <i
-				class="fa-solid fa-cart-shopping"></i>
+			<a href="cart" class="icon-btn cart-icon">
 
+    <i class="fa-solid fa-cart-shopping"></i>
+
+    <% if(cartCount > 0){ %>
+
+        <span class="cart-badge">
+
+            <%=cartCount%>
+
+        </span>
+
+    <% } %>
+
+</a>
 			</a> <a href="Profile.jsp" class="icon-btn"> <i
 				class="fa-solid fa-user"></i>
 

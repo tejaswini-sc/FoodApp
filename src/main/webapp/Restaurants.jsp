@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 
 <%@ page import="java.util.List,com.foodapp.model.Restaurant"%>
-
+<%@ page import="java.time.LocalTime"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,7 +27,19 @@
 </head>
 
 <body>
+	<%@page import="com.foodapp.model.Cart"%>
+	<%@page import="com.foodapp.model.User"%>
+	<%
+	Cart cart = (Cart) session.getAttribute("cart");
 
+	int cartCount = 0;
+
+	if (cart != null) {
+
+		cartCount = cart.getTotalItems();
+
+	}
+	%>
 
 	<!-- Navbar -->
 
@@ -53,20 +65,83 @@
 		<div class="nav-icons">
 
 			<a href="cart" class="icon-btn cart-icon"> <i
-				class="fa-solid fa-cart-shopping"></i>
+				class="fa-solid fa-cart-shopping"></i> <%
+ if (cartCount > 0) {
+ %> <span class="cart-badge"><%=cartCount > 9 ? "9+" : cartCount%>
+
+			</span> <%
+ }
+ %>
 
 			</a>
-			
-			 <a
-				href="Profile.jsp" class="icon-btn"> <i class="fa-solid fa-user"></i>
+			<div class="profile-menu">
 
-			</a>
+				<a href="#" class="icon-btn"> <i class="fa-solid fa-user"></i>
 
+				</a>
+				<%
+				User user = (User) session.getAttribute("user");
+				%>
+				<div class="dropdown">
+
+					<div class="user-name">
+
+						<%
+						if (user != null) {
+						%>
+
+						👋 Hi,
+						<%=user.getUserName()%>
+
+						<%
+						} else {
+						%>
+
+						👋 Welcome Guest
+
+						<%
+						}
+						%>
+
+					</div>
+
+					<a href="myOrders"> 📦 My Orders </a> <a href="Profile.jsp"> 👤
+						My Profile </a> <a href="logout"> 🚪 Logout </a>
+
+				</div>
+
+			</div>
 		</div>
 
 	</nav>
 
+	<%
+	String greeting = "";
 
+	int hour = LocalTime.now().getHour();
+
+	if (hour < 12) {
+
+		greeting = "☀️ Good Morning";
+
+	} else if (hour < 17) {
+
+		greeting = "🌤 Good Afternoon";
+
+	} else {
+
+		greeting = "🌙 Good Evening";
+
+	}
+
+	String username = "";
+
+	if (user != null) {
+
+		username = user.getUserName(); // change if your getter is different
+
+	}
+	%>
 	<!-- Hero Section -->
 
 	<section id="home" class="hero">
@@ -74,6 +149,22 @@
 		<div class="hero-left">
 
 			<div class="tag">🔥 Trending Near You</div>
+
+			<%
+			if (user != null) {
+			%>
+
+			<div class="welcome">
+
+				<%=greeting%>,
+				<%=username%>
+				👋
+
+			</div>
+
+			<%
+			}
+			%>
 
 			<h1>DISCOVER DELICIOUS FOOD</h1>
 
@@ -83,10 +174,8 @@
 
 			<div class="search-box">
 
-				<input type="text" placeholder="Search restaurants...">
-
-				<button>Search</button>
-
+				<i class="fa-solid fa-magnifying-glass"></i> <input type="text"
+					id="searchInput" placeholder="Search restaurants...">
 			</div>
 
 		</div>
@@ -172,8 +261,7 @@
 		{
 		%>
 
-		<div class="card">
-
+		<div class="card restaurant-card">
 			<div class="heart">
 
 				<i class="fa-regular fa-heart"></i>
@@ -186,13 +274,13 @@
 
 			</div>
 
-			<h3>
+			<h3 class="restaurant-name">
 
 				<%=restaurant.getName()%>
 
 			</h3>
 
-			<p>
+			<p class="restaurant-cuisine">
 
 				<%=restaurant.getCuisineType()%>
 
@@ -220,17 +308,21 @@
 		}
 		%>
 
+		<h2 id="noResult" style="display: none">No restaurants found 🍽️
+
+		</h2>
+
 	</section>
 
 	<footer>
 
 		<div class="footer-container">
 
-			<div class="footer-left">
+			<div class="footer-about">
 
 				<h2>🍃 FoodCafe</h2>
 
-				<p>Crafting delicious experiences one meal at a time.</p>
+				<p>Crafting delicious experiences, one meal at a time.</p>
 
 			</div>
 
@@ -238,17 +330,9 @@
 
 				<h3>Quick Links</h3>
 
-				<ul>
+				<a href="restaurants#home">Home</a> <a href="restaurants#restaurant">Restaurants</a>
 
-					<li>Home</li>
-
-					<li>Restaurants</li>
-
-					<li>Orders</li>
-
-					<li>Profile</li>
-
-				</ul>
+				<a href="myOrders">Orders</a>
 
 			</div>
 
@@ -256,11 +340,18 @@
 
 				<h3>Contact</h3>
 
-				<p>📍 Karnataka, India</p>
+				<p>📧 support@foodcafe.com</p>
 
-				<p>📧 foodcafe@gmail.com</p>
+				<p>📞 +91 XXXXX XXXXX</p>
 
-				<p>📞 +91 9876543210</p>
+			</div>
+
+			<div class="footer-social">
+
+				<h3>Follow Us</h3>
+
+				<a href="#">📷 Instagram</a> <a href="#">💼 LinkedIn</a> <a href="#">💻
+					GitHub</a>
 
 			</div>
 
@@ -268,12 +359,45 @@
 
 		<hr>
 
-		<p class="copyright">© 2026 FoodCafe | Made with ❤️</p>
+		<p class="copyright">© 2026 FoodCafe. All Rights Reserved.</p>
 
 	</footer>
+	<script>
 
+const searchInput = document.getElementById("searchInput");
+const cards = document.querySelectorAll(".restaurant-card");
 
+searchInput.addEventListener("keyup", function () {
 
+    let search = this.value.toLowerCase();
+
+    cards.forEach(function(card){
+
+        let name = card.querySelector(".restaurant-name").textContent.toLowerCase();
+        let cuisine = card.querySelector(".restaurant-cuisine").textContent.toLowerCase();
+
+        console.log("Searching:", search);
+        console.log("Restaurant:", name);
+
+        if(name.includes(search) || cuisine.includes(search)){
+
+            console.log("MATCH");
+
+            card.style.display = "";
+
+        }else{
+
+            console.log("HIDE");
+
+            card.style.display = "none";
+
+        }
+
+    });
+
+});
+
+</script>
 </body>
 
 </html>
