@@ -1,9 +1,13 @@
 package com.foodapp.servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.foodapp.daoimpl.RestaurantDAOImp;
+import com.foodapp.daoimpl.UserDaoImp;
 import com.foodapp.model.Restaurant;
 import com.foodapp.model.User;
 
@@ -28,6 +32,21 @@ public class AdminRestaurantServlet extends HttpServlet {
 		String restaurantIdParam = req.getParameter("restaurantId");
 
 		RestaurantDAOImp restaurantDao = new RestaurantDAOImp();
+
+		UserDaoImp userDao = new UserDaoImp();
+		List<User> allUsers = userDao.getAllUser();
+		List<User> owners = new ArrayList<>();
+		Map<Integer, String> ownerNames = new HashMap<>();
+
+		for (User u : allUsers) {
+			if ("owner".equalsIgnoreCase(u.getRole())) {
+				owners.add(u);
+				ownerNames.put(u.getuserid(), u.getUserName());
+			}
+		}
+
+		req.setAttribute("owners", owners);
+		req.setAttribute("ownerNames", ownerNames);
 
 		if (restaurantIdParam != null && !restaurantIdParam.isEmpty()) {
 
@@ -68,11 +87,7 @@ public class AdminRestaurantServlet extends HttpServlet {
 
 		if ("add".equals(action)) {
 
-			HttpSession session = req.getSession();
-			User user = (User) session.getAttribute("user");
-
 			Restaurant restaurant = buildRestaurantFromRequest(req);
-			restaurant.setAdminUserId(user.getuserid());
 			restaurant.setActive("on".equals(req.getParameter("isActive")));
 
 			restaurantDao.addRestaurant(restaurant);
@@ -87,7 +102,6 @@ public class AdminRestaurantServlet extends HttpServlet {
 
 				Restaurant restaurant = buildRestaurantFromRequest(req);
 				restaurant.setResturantID(restaurantId);
-				restaurant.setAdminUserId(existing.getAdminUserId());
 				restaurant.setActive("on".equals(req.getParameter("isActive")));
 
 				restaurantDao.updateResturant(restaurant);
@@ -123,6 +137,7 @@ public class AdminRestaurantServlet extends HttpServlet {
 		restaurant.setAddress(req.getParameter("address"));
 		restaurant.setRating(Double.parseDouble(req.getParameter("rating")));
 		restaurant.setImagePath(req.getParameter("imagePath"));
+		restaurant.setOwnerUserId(Integer.parseInt(req.getParameter("ownerUserId")));
 
 		return restaurant;
 	}

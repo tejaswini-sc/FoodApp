@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="com.foodapp.model.Restaurant"%>
+<%@ page import="java.util.List,com.foodapp.model.Restaurant"%>
 <%@ page import="com.foodapp.model.User"%>
 
 <%
@@ -13,6 +13,7 @@ if (user == null || !"admin".equalsIgnoreCase(user.getRole())) {
 }
 
 Restaurant restaurant = (Restaurant) request.getAttribute("restaurant");
+List<User> owners = (List<User>) request.getAttribute("owners");
 %>
 
 <!DOCTYPE html>
@@ -42,6 +43,7 @@ Restaurant restaurant = (Restaurant) request.getAttribute("restaurant");
 			<li><a href="<%=ctx%>/admin/restaurants" class="active">Restaurants</a></li>
 			<li><a href="<%=ctx%>/admin/menu">Menu</a></li>
 			<li><a href="<%=ctx%>/admin/orders">Orders</a></li>
+			<li><a href="<%=ctx%>/admin/restaurantOwners">Restaurant Owners</a></li>
 			<li><a href="<%=ctx%>/restaurants">View Site</a></li>
 		</ul>
 
@@ -104,6 +106,23 @@ Restaurant restaurant = (Restaurant) request.getAttribute("restaurant");
 					<label>Image URL</label>
 					<input type="text" name="imagePath"
 						value="<%=restaurant.getImagePath()%>" required>
+				</div>
+
+				<div class="input-group">
+					<label>Restaurant Owner</label>
+					<select name="ownerUserId" required>
+						<option value="">-- Select an owner --</option>
+						<%
+						if (owners != null) {
+							for (User owner : owners) {
+						%>
+						<option value="<%=owner.getuserid()%>"
+							<%=restaurant.getOwnerUserId() == owner.getuserid() ? "selected" : ""%>><%=owner.getUserName()%></option>
+						<%
+							}
+						}
+						%>
+					</select>
 				</div>
 
 				<div class="input-group checkbox-group">

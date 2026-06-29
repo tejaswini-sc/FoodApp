@@ -12,7 +12,7 @@ public class RestaurantDAOImp implements RestaurantDAO {
 
 
     private static final String INSERT =
-            "INSERT INTO restaurant(Name,CuisineType,DeliveryTime,Address,AdminUserID,Rating,IsActive,image_path) VALUES(?,?,?,?,?,?,?,?)";
+            "INSERT INTO restaurant(Name,CuisineType,DeliveryTime,Address,OwnerUserID,Rating,IsActive,image_path) VALUES(?,?,?,?,?,?,?,?)";
 
     private static final String GET_ONE =
             "SELECT * FROM restaurant WHERE RestaurantID=?";
@@ -21,7 +21,7 @@ public class RestaurantDAOImp implements RestaurantDAO {
             "SELECT * FROM restaurant";
 
     private static final String UPDATE =
-            "UPDATE restaurant SET Name=?,CuisineType=?,DeliveryTime=?,Address=?,AdminUserID=?,Rating=?,IsActive=?,image_path=? WHERE RestaurantID=?";
+            "UPDATE restaurant SET Name=?,CuisineType=?,DeliveryTime=?,Address=?,OwnerUserID=?,Rating=?,IsActive=?,image_path=? WHERE RestaurantID=?";
 
     private static final String DELETE =
             "DELETE FROM restaurant WHERE RestaurantID=?";
@@ -46,7 +46,7 @@ public class RestaurantDAOImp implements RestaurantDAO {
             ps.setString(2, r.getCuisineType());
             ps.setInt(3, r.getDeliveryTime());
             ps.setString(4, r.getAddress());
-            ps.setInt(5, r.getAdminUserId());
+            ps.setInt(5, r.getOwnerUserId());
             ps.setDouble(6, r.getRating());
             ps.setBoolean(7, r.isActive());
             ps.setString(8, r.getImagePath());
@@ -86,7 +86,7 @@ public class RestaurantDAOImp implements RestaurantDAO {
                 r.setCuisineType(rs.getString("CuisineType"));
                 r.setDeliveryTime(rs.getInt("DeliveryTime"));
                 r.setAddress(rs.getString("Address"));
-                r.setAdminUserId(rs.getInt("AdminUserID"));
+                r.setOwnerUserId(rs.getInt("OwnerUserID"));
                 r.setRating(rs.getDouble("Rating"));
                 r.setActive(rs.getBoolean("IsActive"));
                 r.setImagePath(rs.getString("image_path"));
@@ -124,7 +124,7 @@ public class RestaurantDAOImp implements RestaurantDAO {
                 r.setCuisineType(rs.getString("CuisineType"));
                 r.setDeliveryTime(rs.getInt("DeliveryTime"));
                 r.setAddress(rs.getString("Address"));
-                r.setAdminUserId(rs.getInt("AdminUserID"));
+                r.setOwnerUserId(rs.getInt("OwnerUserID"));
                 r.setRating(rs.getDouble("Rating"));
                 r.setActive(rs.getBoolean("IsActive"));
                 r.setImagePath(rs.getString("image_path"));
@@ -155,7 +155,7 @@ public class RestaurantDAOImp implements RestaurantDAO {
             ps.setString(2, r.getCuisineType());
             ps.setInt(3, r.getDeliveryTime());
             ps.setString(4, r.getAddress());
-            ps.setInt(5, r.getAdminUserId());
+            ps.setInt(5, r.getOwnerUserId());
             ps.setDouble(6, r.getRating());
             ps.setBoolean(7, r.isActive());
             ps.setString(8, r.getImagePath());

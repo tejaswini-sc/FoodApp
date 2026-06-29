@@ -7,7 +7,7 @@ public class Restaurant {
 	private String CuisineType;
 	private int DeliveryTime;
 	private String Address;
-	private int AdminUserId;
+	private int OwnerUserId;
 	private double Rating;
 	private boolean isActive;
 	private String imagePath;
@@ -17,14 +17,14 @@ public class Restaurant {
 	}
 
 	public Restaurant(int resturantID, String name, String cuisineType, int deliveryTime, String address,
-			int adminUserId, float rating, boolean isActive, String imagePath) {
+			int ownerUserId, float rating, boolean isActive, String imagePath) {
 		super();
 		ResturantID = resturantID;
 		Name = name;
 		CuisineType = cuisineType;
 		DeliveryTime = deliveryTime;
 		Address = address;
-		AdminUserId = adminUserId;
+		OwnerUserId = ownerUserId;
 		Rating = rating;
 		this.isActive = isActive;
 		this.imagePath = imagePath;
@@ -101,17 +101,17 @@ public class Restaurant {
 	}
 
 	/**
-	 * @return the adminUserId
+	 * @return the ownerUserId
 	 */
-	public int getAdminUserId() {
-		return AdminUserId;
+	public int getOwnerUserId() {
+		return OwnerUserId;
 	}
 
 	/**
-	 * @param adminUserId the adminUserId to set
+	 * @param ownerUserId the ownerUserId to set
 	 */
-	public void setAdminUserId(int adminUserId) {
-		AdminUserId = adminUserId;
+	public void setOwnerUserId(int ownerUserId) {
+		OwnerUserId = ownerUserId;
 	}
 
 	/**
@@ -159,7 +159,7 @@ public class Restaurant {
 	@Override
 	public String toString() {
 		return "Resturant [ResturantID=" + ResturantID + ", Name=" + Name + ", CuisineType=" + CuisineType
-				+ ", DeliveryTime=" + DeliveryTime + ", Address=" + Address + ", AdminUserId=" + AdminUserId
+				+ ", DeliveryTime=" + DeliveryTime + ", Address=" + Address + ", OwnerUserId=" + OwnerUserId
 				+ ", Rating=" + Rating + ", isActive=" + isActive + ", imagePath=" + imagePath + "]";
 	}
 

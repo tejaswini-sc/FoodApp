@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.List,com.foodapp.model.Restaurant"%>
+<%@ page import="java.util.Map"%>
 <%@ page import="com.foodapp.model.User"%>
 
 <%
@@ -13,6 +14,8 @@ if (user == null || !"admin".equalsIgnoreCase(user.getRole())) {
 }
 
 List<Restaurant> allResturant = (List<Restaurant>) request.getAttribute("allResturant");
+List<User> owners = (List<User>) request.getAttribute("owners");
+Map<Integer, String> ownerNames = (Map<Integer, String>) request.getAttribute("ownerNames");
 %>
 
 <!DOCTYPE html>
@@ -42,6 +45,7 @@ List<Restaurant> allResturant = (List<Restaurant>) request.getAttribute("allRest
 			<li><a href="<%=ctx%>/admin/restaurants" class="active">Restaurants</a></li>
 			<li><a href="<%=ctx%>/admin/menu">Menu</a></li>
 			<li><a href="<%=ctx%>/admin/orders">Orders</a></li>
+			<li><a href="<%=ctx%>/admin/restaurantOwners">Restaurant Owners</a></li>
 			<li><a href="<%=ctx%>/restaurants">View Site</a></li>
 		</ul>
 
@@ -102,6 +106,22 @@ List<Restaurant> allResturant = (List<Restaurant>) request.getAttribute("allRest
 						placeholder="images/restaurants/example.jpg" required>
 				</div>
 
+				<div class="input-group">
+					<label>Restaurant Owner</label>
+					<select name="ownerUserId" required>
+						<option value="">-- Select an owner --</option>
+						<%
+						if (owners != null) {
+							for (User owner : owners) {
+						%>
+						<option value="<%=owner.getuserid()%>"><%=owner.getUserName()%></option>
+						<%
+							}
+						}
+						%>
+					</select>
+				</div>
+
 				<div class="input-group checkbox-group">
 					<label> <input type="checkbox" name="isActive" checked>
 						Active
@@ -136,6 +156,7 @@ List<Restaurant> allResturant = (List<Restaurant>) request.getAttribute("allRest
 							<th>Cuisine</th>
 							<th>Delivery</th>
 							<th>Rating</th>
+							<th>Owner</th>
 							<th>Status</th>
 							<th>Actions</th>
 						</tr>
@@ -152,6 +173,7 @@ List<Restaurant> allResturant = (List<Restaurant>) request.getAttribute("allRest
 							<td><%=restaurant.getCuisineType()%></td>
 							<td><%=restaurant.getDeliveryTime()%> min</td>
 							<td>⭐ <%=restaurant.getRating()%></td>
+							<td><%=ownerNames != null ? ownerNames.getOrDefault(restaurant.getOwnerUserId(), "Unknown") : "Unknown"%></td>
 							<td>
 								<%
 								if (restaurant.isActive()) {

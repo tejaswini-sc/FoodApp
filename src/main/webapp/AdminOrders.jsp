@@ -45,6 +45,7 @@ Map<Integer, String> restaurantNames = (Map<Integer, String>) request.getAttribu
             <li><a href="<%=ctx%>/admin/restaurants">Restaurants</a></li>
             <li><a href="<%=ctx%>/admin/menu">Menu</a></li>
             <li><a href="<%=ctx%>/admin/orders" class="active">Orders</a></li>
+            <li><a href="<%=ctx%>/admin/restaurantOwners">Restaurant Owners</a></li>
             <li><a href="<%=ctx%>/restaurants">View Site</a></li>
         </ul>
 
