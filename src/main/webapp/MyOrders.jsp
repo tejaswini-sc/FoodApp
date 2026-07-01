@@ -73,7 +73,7 @@ List<OrderTable> orders = (List<OrderTable>) request.getAttribute("orders");
 				class="fa-solid fa-cart-shopping"></i> <%
  if (cartCount > 0) {
  %> <span
-				class="cart-badge"> <%=cartCount%>
+				class="cart-badge"><%=cartCount > 9 ? "9+" : cartCount%>
 
 			</span> <%
  }
@@ -85,6 +85,7 @@ List<OrderTable> orders = (List<OrderTable>) request.getAttribute("orders");
 			</a>
 
 		</div>
+
 
 	</nav>
 
@@ -105,7 +106,7 @@ List<OrderTable> orders = (List<OrderTable>) request.getAttribute("orders");
 
 		<div class="empty-orders">
 
-			<img src="images/no_orders.png">
+			<img src="images/no_orders.gif">
 
 			<h2>No Orders Yet</h2>
 
@@ -146,9 +147,10 @@ List<OrderTable> orders = (List<OrderTable>) request.getAttribute("orders");
 
 			<div class="order-middle">
 
-				<span class="status <%=order.getStatus().toLowerCase()%>"> <%=order.getStatus()%>
-
-				</span>
+				<span
+					class="status <%=order.getStatus().toLowerCase().replace(" ", "-")%>">
+					<%=order.getStatus()%>
+				</span> </span>
 
 			</div>
 

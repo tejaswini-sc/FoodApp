@@ -31,6 +31,10 @@ double total = subtotal + delivery + gst;
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
 <link
 	href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
 	rel="stylesheet">
@@ -79,7 +83,7 @@ double total = subtotal + delivery + gst;
 				class="fa-solid fa-cart-shopping"></i> <%
  if (cartCount > 0) {
  %> <span
-				class="cart-badge"> <%=cartCount%>
+				class="cart-badge"><%=cartCount > 9 ? "9+" : cartCount%>
 
 			</span> <%
  }

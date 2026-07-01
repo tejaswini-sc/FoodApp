@@ -88,7 +88,7 @@ if(cart != null){
 
         <span class="cart-badge">
 
-            <%=cartCount%>
+            <%=cartCount > 9 ? "9+" : cartCount%>
 
         </span>
 

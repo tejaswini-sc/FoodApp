@@ -107,3 +107,8 @@
     background:#6fa52d;
 
 }
+
+.status.ready-for-pickup {
+    background-color: #fff3cd;
+    color: #856404;
+}

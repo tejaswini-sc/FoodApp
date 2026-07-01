@@ -96,7 +96,7 @@ if (cart != null) {
 				class="fa-solid fa-cart-shopping"></i> <%
  if (cartCount > 0) {
  %> <span
-				class="cart-badge"> <%=cartCount%>
+				class="cart-badge"><%=cartCount > 9 ? "9+" : cartCount%>
 
 			</span> <%
  }
